@@ -63,5 +63,22 @@
                                 </div>
 
 
+                                <div class="col-xl-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Area [ Smooth ] Chart</h5>
+                                        </div>
+                                        <div class="card-block">
+                                            <div id="morris-area-curved-chart" style="height:300px"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+ <!-- chart-morris Js -->
+    <script src="{{ asset('assets/plugins/chart-morris/js/raphael.min.js')}}"></script>
+    <script src="{{ asset('assets/plugins/chart-morris/js/morris.min.js')}}"></script>
+    <script src="{{ asset('assets/js/pages/chart-morris-custom.js')}}"></script>
+
 @endsection
 

@@ -1,7 +1,7 @@
 <html lang="en">
 
 <head>
-    <title>Datta Able Free Bootstrap 4 Admin Template</title>
+    <title>@yield('title')</title>
     <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 11]>
@@ -15,15 +15,20 @@
     <meta name="description" content="Free Datta Able Admin Template come up with latest Bootstrap 4 framework with basic components, form elements and lots of pre-made layout options" />
     <meta name="keywords" content="admin templates, bootstrap admin templates, bootstrap 4, dashboard, dashboard templets, sass admin templets, html admin templates, responsive, bootstrap admin templates free download,premium bootstrap admin templates, datta able, datta able bootstrap admin template, free admin theme, free dashboard template"/>
     <meta name="author" content="CodedThemes"/>
+    <meta name="site_url" content="{{url('')}}">
+      <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
     <!-- Favicon icon -->
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{{ asset('assets/images/favicon.ico')}}" type="image/x-icon">
     <!-- fontawesome icon -->
-    <link rel="stylesheet" href="assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome/css/fontawesome-all.min.css')}}">
     <!-- animation css -->
-    <link rel="stylesheet" href="assets/plugins/animation/css/animate.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/animation/css/animate.min.css')}}">
     <!-- vendor css -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
 
 </head>
 
