@@ -6,6 +6,8 @@ use App\Models\Categories;
 use App\Models\Sales_invocie;
 use App\Models\Users;
 use App\Models\Discounts;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
  
 
 
@@ -59,7 +61,7 @@ class SalersController extends Controller
         $product = Products::all();
         $discount = Discounts::all();
 
-         return view('sellers.sales.craete_sale', compact('sales','count', 'cat', 'product', 'discount'));
+         return view('sellers.sales.create_sale', compact('sales','count', 'cat', 'product', 'discount'));
     }
 
     public function all_sales()
@@ -87,10 +89,38 @@ class SalersController extends Controller
 
       public function loader($id)
       {
-          $discount = Discounts::find("$id");
-          
-        return view('sellers.sales.load-discount', compact('discount'))->render();
+  
+          $discount = Discounts::where('product_id', $id)->first();
 
+          
+
+         if($discount == null)
+         {
+            return view('sellers.sales.no-discount')->with('error', 'No discount for this Product');
+           
+         }
+         else
+         {
+            return view('sellers.sales.load-discount', compact('discount'))->render();
+           
+         }
+
+       
+
+      }
+
+      public function sales_invoice($id)
+      {
+           $invoice = Sales_invocie::find("$id");
+
+           return view('sellers.invoice.invoice', compact('invoice'));
+      }
+
+      public function invoice_print($id)
+      {
+        $invoice = Sales_invocie::find("$id");
+
+         return view('sellers.invoice.print-invoice', compact('invoice'));
       }
 
 
@@ -100,9 +130,141 @@ class SalersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request , Sales_invocie $sales_invocie, Products $product)
     {
+        $rules=['category' => 'required',
+                  'product'=> 'required',
+                   'qty' => 'required',
+                    'customer_name'=>'required',
+                      'customer_phone' => 'required'];
+
+         $messages=[ 'category.required' => 'Select a Category',
+                     'product.required' => 'Select a Product'
+                    ];
+
+         $validate = Validator::make($request->all(), $rules, $messages);
+
+                if($validate->fails())
+                {
+                    return back()->withErrors($validate->errors());
+                } 
+
+                else
+                {
+
+                    $random = Str::random(14);
+
+                    
+                    $id = session()->get('id');
+                    $user = Users::find("$id");
+
+                    $product = Products::find($request->product);
+                 
+
+                  $discount = Discounts::where('product_id', $request->product)->first(); 
+                  
+            if($request->qty <= $product->qty )
+            {
+
+                  if($discount == null)
+                  {
+                    
+                    $product_total_price = $product->price * $request->qty;
+
+                    $sales_invocie->product_id = $request->product; 
+                    $sales_invocie->cat_id = $request->category; 
+                    $sales_invocie->user_id = $user->id;
+                    $sales_invocie->discount_id = $discount->id;
+                    $sales_invocie->invoice_no = $random;   
+                    $sales_invocie->qty = $request->qty; 
+                    $sales_invocie->amount =  $product_total_price; 
+                    $sales_invocie->customer_name = $request->customer_name; 
+                    $sales_invocie->customer_phone = $request->customer_phone;
+                    $sales_invocie->customer_address = $request->customer_address;
+                    $sales_invocie->save();
+
+                             // update qty
+                       $availbleStock =  $product->price - $request->qty;
+                       $product->qty = $availbleStock;
+                       $product->update();
+
+                    return back()->with('success', 'Purchase was successfuly with normal price');
+                    
+
+                  }
+
+                  else
+                    {
+                          $discount_price = $request->product_discount_price;
+                          $qty_discount = $request->product_qty_price;
+
+                          if($request->qty < $discount->product_qty || $discount->discount_per_product !== null || $discount->product_qty == null)
+                          {
+                            $sales_invocie->product_id = $request->product; 
+                            $sales_invocie->cat_id = $request->category; 
+                            $sales_invocie->user_id = $user->id; 
+                            $sales_invocie->discount_id = $discount->id;
+                            $sales_invocie->invoice_no = $random;   
+                            $sales_invocie->qty = $request->qty; 
+                            $sales_invocie->amount =  $discount_price; 
+                            $sales_invocie->customer_name = $request->customer_name; 
+                            $sales_invocie->customer_phone = $request->customer_phone;
+                            $sales_invocie->customer_address = $request->customer_address;
+
+                            $sales_invocie->save();
+
+                               // update qty
+                            $availbleStock =  $product->price - $request->qty;
+                            $product->qty = $availbleStock;
+                            $product->update();
+
+                            return back()->with('success', 'Purchase was successfuly with discount price');
+    
+                          }
+                          
+                            elseif($discount->qty_price !== null && $request->qty >= $discount->product_qty)
+                            {
+
+                                $sales_invocie->product_id = $request->product; 
+                                $sales_invocie->cat_id = $request->category; 
+                                $sales_invocie->user_id = $request->$user->id; 
+                                $sales_invocie->discount_id = $discount->id;
+                                $sales_invocie->invoice_no = $random;   
+                                $sales_invocie->qty = $request->qty; 
+                                $sales_invocie->amount =  $qty_discount; 
+                                $sales_invocie->customer_name = $request->customer_name; 
+                                $sales_invocie->customer_phone = $request->customer_phone;
+                                $sales_invocie->customer_address = $request->customer_address;
+
+                                $sales_invocie->save();
+
+                                 // update qty
+                                $availbleStock =  $product->price - $request->qty;
+                                $product->qty = $availbleStock;
+                                $product->update();
+
+                                return back()->with('success', 'Purchase was successfuly with product qty promo price');
+
         
+                            }
+
+                            else
+                            {
+                               return back()->with('error', 'failed try again...');
+                            }
+
+
+                    }     
+
+                  
+                  }
+
+                  else
+                    {
+                        return back()->with('error', 'OUT OF STOCK!');
+                    }
+
+                }
     }
 
     /**

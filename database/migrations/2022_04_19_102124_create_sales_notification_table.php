@@ -15,10 +15,18 @@ return new class extends Migration
     {
         Schema::create('sales_notification', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id')->unsigned();
             $table->string('title');
             $table->string('description')->nullable();
             $table->string('message');
+           
             $table->timestamps();
+
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('users')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
 

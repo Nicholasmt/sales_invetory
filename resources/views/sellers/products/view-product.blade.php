@@ -17,12 +17,12 @@
 
               
                 <div class="col-md-6 form-group">
-                       <label for=""> Product Title</label>
+                       <label for=""> Product Name</label>
                    </div> 
  
                    <div class="col-md-6 form-group">
                        
-                       <label class="btn btn-info move">{{$p->category->description}}</label>
+                       <label class="btn btn-info move">{{$p->product_name}}</label>
                    </div> 
 
                    <div class="col-md-6 form-group">

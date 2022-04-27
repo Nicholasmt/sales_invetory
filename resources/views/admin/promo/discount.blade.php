@@ -2,6 +2,11 @@
 @section('title', 'Sales | Inventory')
 @section('content')
 
+@section('header')
+
+<link href="{{ asset('assets/css/datatables.min.css')}}" rel="stylesheet">
+
+@endsection
 
         <div class="col-sm-12">
            <h5>Product Discounts</h5>
@@ -31,7 +36,7 @@
 					
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 						
-                       <div class="card-block table-border-style">
+                       <!-- <div class="card-block table-border-style">
                         <form action="" class="">
                           <div class="input-group">
                            <input type="text" class="form-control" placeholder="Search Salers" name="keyword">
@@ -39,7 +44,7 @@
                             <input class="btn btn-primary" type="submit" value="Search">
                         </div>
                     </div>
-                  </form>
+                  </form> -->
                
 
                     </div>
@@ -48,13 +53,13 @@
                                 <thead>
                                     <tr>
                                         <th>S/N</th>
-                                        <th>Product Title</th>
+                                        <th>Product Name</th>
                                         <th>Product Normal Price</th>
                                         <th>Rate (per product)</th>
-                                        <th>Price (Per Product)</th>
+                                        <th>Discount Price</th>
                                         <th>Quantity of Products</th>
                                         <th>Quantity Rate</th>
-                                        <th>Quantity Price</th>
+                                        <th>Quantity Discount Price</th>
                                         <th>Date/Time</th>
                                         <th>Actions</th>
                                         
@@ -73,7 +78,7 @@
                                     <tr>
                                         
                                         <td scope="row">{!!$count++;!!}</td>
-                                        <td class="table-row">{{$d->product->category->description}}</td>
+                                        <td class="table-row">{{$d->product->product_name}}</td>
                                         <td class="table-row">#{{$d->product->price}}</td>
                                         <td class="table-row">{{$d->discount_rate}}%</td>
                                         <td class="table-row">#{{$d->discount_per_product}}</td>
@@ -106,8 +111,9 @@
                               <div class="form-group">
                                 <label for="exampleFormControlSelect1">Select Product</label>
                                 <select class="form-control" id="exampleFormControlSelect1" name="product">
+                                <option disabled selected> Select Product</option></option>
                                     @foreach ($product as $p)
-                                      <option value="{{$p->id}}">{{$p->category->title}}</option>
+                                      <option value="{{$p->id}}">{{$p->product_name}}</option>
                                     @endforeach
                                   </select>
                             </div>
@@ -137,8 +143,9 @@
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Select Product</label>
                                 <select class="form-control" id="exampleFormControlSelect1" name="product">
+                                <option disabled selected> Select Product</option></option>
                                     @foreach ($product as $p)
-                                      <option value="{{$p->id}}">{{$p->category->title}}</option>
+                                      <option value="{{$p->id}}">{{$p->product_name}}</option>
                                     @endforeach
                                   </select>
                             </div>
@@ -171,13 +178,51 @@
 	</div>
 
  
-     <<style>
-     .table-row
-     {
-         text-align:center;
-     }
-     </style>     
+     <style>
+    
+    select.form-control.form-control-sm
+    {
+        padding:10px 10px;
+    }
+
+     </style>  
 
 
-
+ 
 @endsection
+
+@section('script')
+
+      <script src="{{ asset('js/dataTables/datatables.min.js')}}"></script>
+      <script src="{{ asset('js/dataTables/dataTables.bootstrap4.min.js')}}"></script>  
+     
+     <script>
+
+ 
+
+            $(document).ready(function(){
+                $('.table').DataTable({
+                    pageLength: 10,
+                    responsive: true,
+                    dom: '<"html5buttons"B>lTfgitp',
+                    buttons: [
+                         {extend: 'print',
+                        customize: function (win){
+                                $(win.document.body).addClass('white-bg');
+                                $(win.document.body).css('font-size', '10px');
+
+                                $(win.document.body).find('table')
+                                        .addClass('compact')
+                                        .css('font-size', 'inherit');
+                        }
+                        }
+                    ]
+
+                });
+
+            });
+
+        </script>
+
+        @endsection
+

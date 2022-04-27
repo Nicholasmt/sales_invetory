@@ -10,16 +10,16 @@
     @endsection
 
     <div class="col-sm-12">
-           <h5>Product</h5>
+           <h5>Company</h5>
               <hr>
                <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active text-uppercase" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Categories</a>
+                    <a class="nav-link active text-uppercase" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Setup</a>
                 </li>
 			 
 
               <div class="col-sm-12">
-                <h5 class="mt-4">View/Add</h5>
+                <h5 class="mt-4">Setup Your company's Details</h5>
                 <hr>
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item">
@@ -50,31 +50,34 @@
                                 <thead>
                                     <tr>
                                         <th>S/N</th>
-                                        <th>Title</th>
-                                        <th>Description</th>
-                                        <th>Date</th>
+                                        <th>Company Name</th>
+                                        <th>Location</th>
+                                        <th>Contact</th>
+                                        <th>Company CAC</th>
                                         <th>Actions</th>
                                         
                                     </tr>
                                 </thead>
                                 <tbody>
                                     
-                                @if($cats->count() == 0 )
+                                @if($company->count() == 0 )
 
                                 <td scope="row"><label class="btn btn-info"> No data Found</label></td>
 
                                 @else
                                                                 
 
-                                @foreach ($cats as $c)
+                                @foreach ($company as $c)
                                     <tr>
                                         
                                         <td scope="row">{!!$count++;!!}</td>
-                                        <td>{{$c->title}}</td>
-                                        <td>{{$c->description}}</td>
+                                        <td>{{$c->name}}</td>
+                                        <td>{{$c->location}}</td>
+                                        <td>{{$c->contact}}</td>
+                                        <td>{{$c->registration_number}}</td>
                                         <td>{{$c->created_at->diffForHumans()}}</td>
                                         <td><a href="" class="btn btn-primary"> Edit</a></td>
-                                        <td><a href="" class="btn btn-danger"> Delete</a></td>
+                                       
                                    
                                     </tr>
                                 
@@ -92,18 +95,32 @@
               <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                     <div class="row">
                       <div class="col-md-6">
-                        <form method="POST" action="{{ route('admin-savecats')}}">
+                        <form method="POST" action="{{ route('admin-save-setup')}}">
                             @csrf
                             <div class="form-group">
-                                <label for="exampleInputEmail1"> Title</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Title" name="title">
+                                <label for="exampleInputEmail1"> Company Name</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" name="name">
                                
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Description</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder=" Enter Description" name="description">
+                                <label for="exampleInputPassword1">Location</label>
+                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder=" Enter Location" name="location">
                             </div>
+
+                            
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Contact</label>
+                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder=" Enter Contact" name="contact">
+                            </div>
+
+
+                            
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Company CAC</label>
+                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder=" Enter CAC" name="registration_number">
+                            </div>
+
 
                              <input type="submit" class="btn btn-primary" value="Create" >
 

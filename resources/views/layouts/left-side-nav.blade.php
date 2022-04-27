@@ -37,7 +37,7 @@
                     </li>
 
                     <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">
-                        <a href="form_elements.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Company Setup</span></a>
+                        <a href="{{ route('admin-company')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Company Setup</span></a>
                     </li>
                     
                     
@@ -59,7 +59,7 @@
                         <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Products</span></a>
                         <ul class="pcoded-submenu">
                         <li class=""><a href="{{ route('admin-products')}}" class="">Add<span class="pcoded-badge label label-danger">NEW</span></a></li>
-                            <li class=""><a href="{{ route('admin-view-products')}}" class="" target="_blank">View</a></li>
+                            <li class=""><a href="{{ route('admin-view-products')}}" class=""  >View</a></li>
                         </ul>
                     </li>
                     
@@ -69,7 +69,7 @@
 					
                    
                     <li data-username="Table bootstrap datatable footable" class="nav-item">
-                        <a href="tbl_bootstrap.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-server"></i></span><span class="pcoded-mtext">Sellers Logs</span></a>
+                        <a href="{{ route('admin-logs')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-server"></i></span><span class="pcoded-mtext">Sellers Logs</span></a>
                     </li>
 
                    

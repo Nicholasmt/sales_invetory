@@ -2,6 +2,11 @@
 @section('title', 'Sales | Inventory')
 @section('content')
 
+@section('header')
+
+<link href="{{ asset('assets/css/datatables.min.css')}}" rel="stylesheet">
+
+@endsection
 
 <div class="col-xl-12">
     <div class="card">
@@ -66,6 +71,45 @@
         </div>
     </div>
 </div>
-
-
+<style>
+    select.form-control.form-control-sm
+    {
+        padding:10px 10px;
+    }
+</style>
 @endsection
+
+@section('script')
+
+      <script src="{{ asset('js/dataTables/datatables.min.js')}}"></script>
+      <script src="{{ asset('js/dataTables/dataTables.bootstrap4.min.js')}}"></script>  
+     
+     <script>
+
+ 
+
+            $(document).ready(function(){
+                $('.table').DataTable({
+                    pageLength: 10,
+                    responsive: true,
+                    dom: '<"html5buttons"B>lTfgitp',
+                    buttons: [
+                         {extend: 'print',
+                        customize: function (win){
+                                $(win.document.body).addClass('white-bg');
+                                $(win.document.body).css('font-size', '10px');
+
+                                $(win.document.body).find('table')
+                                        .addClass('compact')
+                                        .css('font-size', 'inherit');
+                        }
+                        }
+                    ]
+
+                });
+
+            });
+
+        </script>
+
+        @endsection

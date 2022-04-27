@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Products;
+use App\Models\Company_setup;
 use Illuminate\Support\Facades\Validator;
 
-class ProductController extends Controller
+class CompanyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $count =1;
+        $company = Company_setup::all();
+         return view('admin.company-Setup.add', compact('company','count'));
+
     }
 
     /**
@@ -34,37 +37,33 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Products $product)
+    public function store(Request $request, Company_setup $company)
     {
-                    $rules=['price' => 'required',
-                             'qty' => 'required',
-                            'category' => 'required'];
+        $rules=['name'=>'required',
+               'location'=>'required',
+                'contact'=>'required',
+                 'registration_number'=>'required'];
 
-            $messages =['category.required' => 'select a product category'];
+                $messages=[];
 
-            $validate = Validator::make($request->all(), $rules, $messages);
+                $validate = Validator::make($request->all(), $rules, $messages);
 
-                if($validate->fails())
-                {
-                    return back()->withErrors($validate->errors());
-                    
+                if($validate->fails()){
+
+                return back()->withErrors($validate->errors());
+                
                 }
                 else
                 {
+                   $company->name = $request->name;
+                   $company->location = $request->location;
+                   $company->contact = $request->contact;
+                   $company->registration_number = $request->registration_number;
+                   $company->save();
 
-                   $value = $request->price * $request->qty;
-
-                   $product->product_name = $request->product_name;
-                   $product->price = $request->price;
-                   $product->cat_id = $request->category;
-                   $product->qty = $request->qty;
-                   $product->total_value = $value;
-                   $product->save();
-
-                   return back()->with('success', 'Product Added Successfully!');
+                   return back()->with('success', 'created Successfully');
 
                 }
-
 
 
     }
@@ -99,8 +98,8 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    { 
-       
+    {
+        //
     }
 
     /**

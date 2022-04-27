@@ -1,7 +1,15 @@
 @extends('layouts.body')
+
 @section('title', 'Sales | Inventory')
+  
 @section('content')
 
+
+@section('header')
+
+<link href="{{ asset('assets/css/datatables.min.css')}}" rel="stylesheet">
+
+@endsection
 
 <div class="col-xl-12">
     <div class="card">
@@ -10,7 +18,7 @@
             <span class="d-block m-t-5">All <code> Avaiable</code> Products</span>
         </div>
        
-        <div class="card-block table-border-style">
+        <!-- <div class="card-block table-border-style">
             <form action="" class="">
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Search Salers" name="keyword">
@@ -19,7 +27,7 @@
             </div>
 		</div>
 			</form>
-	   </div>
+	   </div> -->
 
         </div>
             <div class="table-responsive">
@@ -27,6 +35,7 @@
                     <thead>
                         <tr>
                             <th>S/N</th>
+                            <th>Product Name</th>
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Total Price</th>
@@ -48,6 +57,7 @@
                         <tr>
                            
                             <td scope="row">{{$count ++;}}</td>
+                            <td>{{$p->product_name}}</td>
                             <td>{{$p->price}}</td>
                             <td>{{$p->qty}}</td>
                             <td>{{$p->total_value}}</td>
@@ -71,5 +81,51 @@
     </div>
 </div>
 
+         <style>
+            
+            select.form-control.form-control-sm
+            {
+                padding:10px 10px;
+            }
 
+            </style> 
+
+            
 @endsection
+
+@section('script')
+
+    <!-- <script src="{{ asset('js/loader.js')}}"></script> -->
+
+      <script src="{{ asset('js/dataTables/datatables.min.js')}}"></script>
+      <script src="{{ asset('js/dataTables/dataTables.bootstrap4.min.js')}}"></script>  
+     
+     <script>
+
+ 
+
+            $(document).ready(function(){
+                $('.table').DataTable({
+                    pageLength: 10,
+                    responsive: true,
+                    dom: '<"html5buttons"B>lTfgitp',
+                    buttons: [
+                         {extend: 'print',
+                        customize: function (win){
+                                $(win.document.body).addClass('white-bg');
+                                $(win.document.body).css('font-size', '10px');
+
+                                $(win.document.body).find('table')
+                                        .addClass('compact')
+                                        .css('font-size', 'inherit');
+                        }
+                        }
+                    ]
+
+                });
+
+            });
+
+        </script>
+
+        @endsection

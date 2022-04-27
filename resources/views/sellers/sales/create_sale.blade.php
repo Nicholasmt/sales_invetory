@@ -2,6 +2,11 @@
 @section('title', 'Sales | Inventory')
 @section('content')
 
+    @section('header')
+
+    <link href="{{ asset('assets/css/datatables.min.css')}}" rel="stylesheet">
+
+    @endsection
 
         <div class="col-sm-12">
            <h5>Product Sales</h5>
@@ -51,10 +56,12 @@
                                 <thead>
                                     <tr>
                                         <th>S/N</th>
+                                        <th>Product Name</th>
                                         <th>Quantity</th>
                                         <th>Amount</th>
                                         <th>Customer Name</th>
                                         <th>Customer Phone</th>
+                                        <th>Customer Address</th>
                                         <th>Date/Time</th>
                                         <th>Action</th>
 
@@ -74,12 +81,14 @@
                                     <tr>
                                         
                                         <td scope="row">{!!$count++;!!}</td>
+                                        <td>{{$s->product->product_name}}</td>
                                         <td>{{$s->qty}}</td>
                                         <td>{{$s->amount}}</td>
                                         <td>{{$s->customer_name}}</td>
                                         <td>{{$s->customer_phone}}</td>
+                                        <td>{{$s->customer_address}}</td>
                                         <td>{{$s->created_at->diffForHumans()}}</td>
-                                        <td><a href="" class="fa fa-eye"></a></td>
+                                        <td><a href="{{ route('saler-sales-invoice',$s->id)}}" class="btn btn-primary">Print Invoice</a></td>
                                        
                                     </tr>
                                 
@@ -97,12 +106,12 @@
                     <div class="row">
                       <div class="col-md-6">
 
-                        <form method="POST" action="{{ route('admin-savecats')}}">
+                        <form method="POST" action="{{ route('saler-save-sales')}}">
                             @csrf
 
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Select Category</label>
-                                <select class="form-control" id="exampleFormControlSelect1" name="category">
+                                <select class="form-control" name="category">
                                 <option disabled selected>Select Category</option>
                                     @foreach ($cat as $c)
                                       <option value="{{$c->id}}">{{$c->title}}</option>
@@ -112,10 +121,10 @@
 
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Select Product</label>
-                                <select class="form-control" id="exampleFormControlSelect1" name="product" id="select">
+                                <select class="form-control" name="product" id="select">
                                 <option disabled selected>Select Product</option>
                                     @foreach ($product as $p)
-                                      <option value="{{$p->id}}">{{$p->category->description}}</option>
+                                      <option value="{{$p->id}}" id="{{$p->id}}">{{$p->category->description}}</option>
                                     @endforeach
                                   </select>
                             </div>
@@ -139,6 +148,11 @@
                                 <input type="text" class="form-control" id="exampleInputPassword1" placeholder=" Enter Description" name="customer_phone">
                             </div>
 
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Customer's Address</label>
+                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder=" Enter Description" name="customer_address">
+                            </div>
+
                              <input type="submit" class="btn btn-primary" value="Make Sale" >
 
                             </form>
@@ -154,7 +168,58 @@
 
  
           
-<script src="{{ asset('js/loader.js')}}"></script>
 
 
+
+ 
+
+
+        <style>
+            
+            select.form-control.form-control-sm
+            {
+                padding:10px 10px;
+            }
+
+            </style>  
+
+
+ 
 @endsection
+
+@section('script')
+
+    <script src="{{ asset('js/loader.js')}}"></script>
+
+      <script src="{{ asset('js/dataTables/datatables.min.js')}}"></script>
+      <script src="{{ asset('js/dataTables/dataTables.bootstrap4.min.js')}}"></script>  
+     
+     <script>
+
+ 
+
+            $(document).ready(function(){
+                $('.table').DataTable({
+                    pageLength: 10,
+                    responsive: true,
+                    dom: '<"html5buttons"B>lTfgitp',
+                    buttons: [
+                         {extend: 'print',
+                        customize: function (win){
+                                $(win.document.body).addClass('white-bg');
+                                $(win.document.body).css('font-size', '10px');
+
+                                $(win.document.body).find('table')
+                                        .addClass('compact')
+                                        .css('font-size', 'inherit');
+                        }
+                        }
+                    ]
+
+                });
+
+            });
+
+        </script>
+
+        @endsection

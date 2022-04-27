@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Products;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Logs;
 
-class ProductController extends Controller
+
+class LogsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $count = 1;
+        $logs = Logs::all();
+        return view('admin.sellers_logs.log', compact('logs'));
     }
 
     /**
@@ -34,39 +36,9 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Products $product)
+    public function store(Request $request)
     {
-                    $rules=['price' => 'required',
-                             'qty' => 'required',
-                            'category' => 'required'];
-
-            $messages =['category.required' => 'select a product category'];
-
-            $validate = Validator::make($request->all(), $rules, $messages);
-
-                if($validate->fails())
-                {
-                    return back()->withErrors($validate->errors());
-                    
-                }
-                else
-                {
-
-                   $value = $request->price * $request->qty;
-
-                   $product->product_name = $request->product_name;
-                   $product->price = $request->price;
-                   $product->cat_id = $request->category;
-                   $product->qty = $request->qty;
-                   $product->total_value = $value;
-                   $product->save();
-
-                   return back()->with('success', 'Product Added Successfully!');
-
-                }
-
-
-
+        //
     }
 
     /**
@@ -99,8 +71,8 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    { 
-       
+    {
+        //
     }
 
     /**

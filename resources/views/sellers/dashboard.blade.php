@@ -2,6 +2,8 @@
 @section('title', 'Sales | Inventory')
 @section('content')
 
+<link rel="stylesheet" href="{{ asset('assets/plugins/chart-morris/css/morris.css')}}">
+
                                  <div class="col-md-6 col-xl-4">
                                     <div class="card daily-sales">
                                         <div class="card-block">

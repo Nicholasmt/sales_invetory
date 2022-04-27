@@ -15,6 +15,13 @@
                     <div class="col-md-6">
                         <form action="{{ route('admin-saveProducts')}}" method="POST">
                             @csrf
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"> Product Name</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Product Name" name="product_name">
+                                <!-- <small id="emailHelp" class="form-text text-muted">Enter Numbers only.</small> -->
+                            </div>
+
                             <div class="form-group">
                                 <label for="exampleInputEmail1"> Product Price</label>
                                 <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Price" name="price">
@@ -29,6 +36,7 @@
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Select Category</label>
                                 <select class="form-control" id="exampleFormControlSelect1" name="category">
+                                <option  disabled selected> Select Category</option>
                                     @foreach ($cat as $c)
                                       <option value="{{$c->id}}">{{$c->title}}</option>
                                     @endforeach

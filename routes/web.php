@@ -54,6 +54,13 @@ Route::group(['prefix'=> 'admin', 'as'=>'admin', 'middleware' => 'admin'], funct
     Route::post('/save-update/{id}', [App\Http\Controllers\AdminController::class, 'saveUpdate'])->name('-save-update');
     Route::post('/save-password/{id}', [App\Http\Controllers\AdminController::class, 'savePassword'])->name('-save-pass');
 
+    //Logs
+    Route::get('/system-logs', [App\Http\Controllers\LogsController::class, 'index'])->name('-logs');
+
+    // company setup
+   Route::get('/comany-setup', [App\Http\Controllers\CompanyController::class, 'index'])->name('-company');
+   Route::post('/save-setup', [App\Http\Controllers\CompanyController::class, 'store'])->name('-save-setup');
+
 
    });
    
@@ -70,6 +77,10 @@ Route::group(['prefix' => 'saler', 'as' => 'saler', 'middleware' => 'saler'], fu
     Route::get('/make-sale', [App\Http\Controllers\SalersController::class, 'create_sales'])->name('-saleP');
     Route::get('/all-sales', [App\Http\Controllers\SalersController::class, 'all_sales'])->name('-all-sales');
     Route::get('/load-discount/{id}', [App\Http\Controllers\SalersController::class, 'loader'])->name('-load-discount');
+    Route::post('/save_sale', [App\Http\Controllers\SalersController::class, 'store'])->name('-save-sales');
+    Route::get('/sale-invoice/{id}', [App\Http\Controllers\SalersController::class, 'sales_invoice'])->name('-sales-invoice');
+    Route::get('/invoice-print/{id}', [App\Http\Controllers\SalersController::class, 'invoice_print'])->name('-print');
+
     
      //create notifaction
     Route::get('/notifaction', [App\Http\Controllers\NoticationsController::class, 'index'])->name('-notifaction');

@@ -39,15 +39,21 @@
                                    <!-- content Start -->
                                        <div class="row"> 
                                          @include('layouts.error')
+                                         
                                        @yield('content')
                                     
                                        </div> 
 
                                     <!-- content Ends -->
 
-                            <footer>
-                               
-                           </footer>
+                                    <!-- <footer>
+                                    <div class="footer">
+                                         
+                                        <div>
+                                            <strong>Copyright</strong> sales inventory &copy; {{date('Y')}}
+                                        </div>
+                                    </div>  
+                           </footer> -->
 
                     
                          </div>
@@ -56,13 +62,23 @@
             </div>
         </div>
     </div>
-
     
-        @yield('script')
+     <style>
+       .footer
+       {
+           text-align:center;
+       }
 
+
+     </style>
+         
     <script src="{{ asset('assets/js/vendor-all.min.js')}}"></script>
 	<script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{ asset('assets/js/pcoded.min.js')}}"></script>
+    
+        @yield('script')
+
+   
 
 
 @endsection

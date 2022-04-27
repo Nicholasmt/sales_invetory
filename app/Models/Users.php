@@ -15,4 +15,9 @@ class Users extends Model
     {
        return $this->belongsTo('App\Models\Roles', 'role_id');
     }
+
+    public function logs()
+    {
+       return $this->hasOne('App\Models\Logs', 'user_id');
+    }
 }
