@@ -17,7 +17,7 @@ class LogsController extends Controller
     {
         $count = 1;
         $logs = Logs::all();
-        return view('admin.sellers_logs.log', compact('logs'));
+        return view('admin.sellers_logs.log', compact('logs', 'count'));
     }
 
     /**

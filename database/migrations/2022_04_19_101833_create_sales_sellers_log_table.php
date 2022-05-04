@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('sales_sellers_log', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
-            $table->date('login_time');
-            $table->date('logout_time');
+            $table->datetime('login_time')->nullable();
+            $table->datetime('logout_time')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')

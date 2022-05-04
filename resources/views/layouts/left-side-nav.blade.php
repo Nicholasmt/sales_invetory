@@ -33,7 +33,7 @@
                     </li>
 
                      <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">
-                        <a href="form_elements.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Sales Overview</span></a>
+                        <a href="{{ route('admin-view-all-sales')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Sales Record</span></a>
                     </li>
 
                     <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">

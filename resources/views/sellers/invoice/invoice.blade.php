@@ -25,29 +25,31 @@
                     <div class="ibox-content p-xl">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <h5>Company Name:</h5>
+                                    @foreach ($company as $c)
+                                     <h5>{{$c->name}}</h5>
                                     <address>
-                                        <strong>Inspinia, Inc.</strong><br>
-                                        106 Jorg Avenu, 600/10<br>
-                                        Chicago, VT 32456<br>
-                                        <abbr title="Phone">P:</abbr> (123) 601-4590
+                                        <strong>Company CAC</strong><br>
+                                        {{$c->registration_number}}<br>
+                                        
+                                        <abbr title="Phone">Contact:</abbr> {{$c->contact}}
                                     </address>
+                                    @endforeach
                                 </div>
 
                                 <div class="col-sm-6 text-right">
-                                    <h4>Invoice No.</h4>
-                                    <h4 class="text-navy">{{$invoice->invoice_no}}</h4>
+                                    <h4>Invoice NO:</h4>
+                                    <h6 class="text-navy">{{$invoice->invoice_no}}</h6><hr>
                                     <h4>Customer's Details:</h4>
                                     <address>
                                         <strong>NAME: {{$invoice->customer_name}}</strong><br>
                                         <abbr title="Phone">PHONE NO:</abbr>  {{$invoice->customer_phone}}<br>
-                                       ADDRESS: Miami, CT 445611<br>
+                                       ADDRESS: {{$invoice->customer_address}}<br>
                                         
                                     </address>
                                     <p>
-                                    <h4>Sellers Details:</h4>
-                                        <span><strong>Sellers Name:</strong> {{$invoice->user_id}}</span><br/>
-                                        <span><strong>Sellers Phone No:</strong> {{$invoice->user_id}}</span><br/>
+                                    <h4>Seller's Details:</h4>
+                                        <span><strong>Name:</strong> {{$invoice->user->first_name}}</span><br/>
+                                        <span><strong>Phone No:</strong> {{$invoice->user->phone}}</span><br/>
                                         <span><strong>Invoice Date:</strong> {{$invoice->created_at}}</span>
                                     </p>
                                 </div>
@@ -67,12 +69,24 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td><div><strong>{{$invoice->product_id}}</strong></div>
+                                        <td><div><strong>{{$invoice->product->product_name}}</strong></div>
                                             <small></small></td>
                                         <td>{{$invoice->qty}} (qty)</td>
-                                        <td>{{$invoice->cat_id}}</td>
+                                        <td>{{$invoice->category->title}}</td>
                                         <td>{{$invoice->qty}}</td>
-                                        <td>$31,98</td>
+                                        <td>
+                                          @if ($invoice->discount_id == null)
+
+                                          <label class="badge badge-info"> No Discount Recorded</label>
+                                         
+                                          @else
+
+                                          {{$invoice->discount->qty_price}}
+                                          
+                                          @endif  
+                                        </td>   
+                                         
+                                       
                                     </tr>
                                     
                                     </tbody>

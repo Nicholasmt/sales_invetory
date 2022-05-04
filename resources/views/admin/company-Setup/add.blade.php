@@ -23,7 +23,7 @@
                 <hr>
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Categories</a>
+                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Compnay Details</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Add New</a>
@@ -54,7 +54,8 @@
                                         <th>Location</th>
                                         <th>Contact</th>
                                         <th>Company CAC</th>
-                                        <th>Actions</th>
+                                        <th>Date/Time</th>
+                                        <th>Action</th>
                                         
                                     </tr>
                                 </thead>

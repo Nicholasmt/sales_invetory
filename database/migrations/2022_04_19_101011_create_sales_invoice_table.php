@@ -18,8 +18,8 @@ return new class extends Migration
             $table->bigInteger('product_id')->unsigned();
             $table->bigInteger('cat_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('discount_id')->unsigned();
-            $table->bigInteger('invoice_no')->unique();
+            $table->bigInteger('discount_id')->nullable();
+            $table->string('invoice_no')->unique();
             $table->bigInteger('qty');
             $table->bigInteger('amount');
             $table->string('customer_name');

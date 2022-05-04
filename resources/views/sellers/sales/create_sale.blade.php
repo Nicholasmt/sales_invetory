@@ -57,6 +57,7 @@
                                     <tr>
                                         <th>S/N</th>
                                         <th>Product Name</th>
+                                        <th>Product Category</th>
                                         <th>Quantity</th>
                                         <th>Amount</th>
                                         <th>Customer Name</th>
@@ -82,6 +83,7 @@
                                         
                                         <td scope="row">{!!$count++;!!}</td>
                                         <td>{{$s->product->product_name}}</td>
+                                        <td>{{$s->category->title}}</td>
                                         <td>{{$s->qty}}</td>
                                         <td>{{$s->amount}}</td>
                                         <td>{{$s->customer_name}}</td>
@@ -124,7 +126,7 @@
                                 <select class="form-control" name="product" id="select">
                                 <option disabled selected>Select Product</option>
                                     @foreach ($product as $p)
-                                      <option value="{{$p->id}}" id="{{$p->id}}">{{$p->category->description}}</option>
+                                      <option value="{{$p->id}}" id="{{$p->id}}">{{$p->product_name}}</option>
                                     @endforeach
                                   </select>
                             </div>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Users;
+use App\Models\Logs;
 
 class IndexController extends Controller
 {
@@ -14,7 +15,7 @@ class IndexController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Logs $log)
     {
        if(session()->get('user_auth') == true && session()->get('privilege') == 1)
        {
@@ -26,8 +27,17 @@ class IndexController extends Controller
            else
 
            {
+
+             $id = session()->get('id');
+             
+              $log->user_id = $id;
+              $log->login_time = date("Y:m:d:H:i:s");;
+              $log->save();
+
+
               return redirect('saler/dashboard');
 
+             
            }
 
 
@@ -99,12 +109,31 @@ class IndexController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function logout(Request $request)
+    public function logout(Request $request, Logs $log)
     {
+         if(session()->get('privilege') == 1)
+         {
+            $request->session()->invalidate();
 
-        $request->session()->invalidate();
+            return redirect('sign-in');
+         }
 
-        return redirect('sign-in');
+         else
+         {
+              $id = session()->get('id');
+              $log = Logs::where('user_id', $id)->where('logout_time', null)->first();
+
+              
+              $log->logout_time = date("Y:m:d:H:i:s");
+              $log->update();
+
+            $request->session()->invalidate();
+
+            return redirect('sign-in');
+         }
+       
+
+       
     }
 
     /**

@@ -73,7 +73,7 @@
                                         <td>{{$c->title}}</td>
                                         <td>{{$c->description}}</td>
                                         <td>{{$c->created_at->diffForHumans()}}</td>
-                                        <td><a href="" class="btn btn-primary"> Edit</a></td>
+                                        
                                         <td><a href="" class="btn btn-danger"> Delete</a></td>
                                    
                                     </tr>

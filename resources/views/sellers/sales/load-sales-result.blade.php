@@ -3,10 +3,11 @@
                     <thead>
                         <tr>
                             <th>S/N</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total Price</th>
+                            <th>Product Name</th>
                             <th>Category</th>
+                            <th>Product Price</th>
+                             <th>Quantity</th>
+                            <th>Amount</th>
                             <th>Date</th>
                             <th>Actions</th>
                         </tr>
@@ -24,11 +25,13 @@
                         <tr>
                            
                             <td scope="row">{{$count ++;}}</td>
-                            <td>{{$s->srice}}</td>
-                            <td>{{$s->qty}}</td>
-                            <td>{{$s->total_value}}</td>
+                            <td>{{$s->product->product_name}}</td>
                             <td>{{$s->category->title}}</td>
+                            <td>{{$s->product->price}}</td>
+                            <td>{{$s->qty}} (qty)</td>
+                            <td>{{$s->amount}}</td>
                             <td>{{$s->created_at->diffForHumans()}}</td>
+                            <td><a href="{{ route('saler-sales-invoice',$s->id)}}" class="btn btn-primary">Print Invoice</a></td>
                              
 
                           

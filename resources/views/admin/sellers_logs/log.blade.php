@@ -23,7 +23,7 @@
                 <hr>
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Categories</a>
+                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Logs</a>
                     </li>
                     <li class="nav-item">
                         <!-- <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Add New</a> -->
@@ -54,7 +54,7 @@
                                         <th>User Email</th>
                                         <th>Log IN Time</th>
                                         <th>Log Out Time</th>
-                                        <th>Actions</th>
+                                        <!-- <th>Actions</th> -->
                                         
                                     </tr>
                                 </thead>
@@ -71,13 +71,12 @@
                                     <tr>
                                         
                                         <td scope="row">{!!$count++;!!}</td>
-                                        <td>{{$l->user->firstname}}</td>
+                                        <td>{{$l->user->first_name}}</td>
                                         <td>{{$l->user->email}}</td>
                                         <td>{{$l->login_time}}</td>
                                         <td>{{$l->logout_time}}</td>
-                                        <td>{{$l->created_at->diffForHumans()}}</td>
-                                         
-                                        <td><a href="" class="btn btn-danger"> Delete</a></td>
+                                        <!-- <td>{{$l->created_at->diffForHumans()}}</td> -->
+                                         <!-- <td><a href="" class="btn btn-danger"> Delete</a></td> -->
                                    
                                     </tr>
                                 

@@ -31,9 +31,12 @@ Route::group(['prefix'=> 'admin', 'as'=>'admin', 'middleware' => 'admin'], funct
 
     Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('-dashbaord');
     
-        //   view salers
+        //view employee
     Route::get('/salers', [App\Http\Controllers\AdminController::class, 'add_new'])->name('-add-new-sellers');
     Route::get('/view', [App\Http\Controllers\AdminController::class, 'view'])->name('-view_all');
+
+    //view all sales
+    Route::get('/view-all-sales', [App\Http\Controllers\AdminController::class, 'view_all_sales'])->name('-view-all-sales');
 
     //  product
     Route::get('/product', [App\Http\Controllers\AdminController::class, 'product'])->name('-products');
@@ -76,11 +79,13 @@ Route::group(['prefix' => 'saler', 'as' => 'saler', 'middleware' => 'saler'], fu
     //sales
     Route::get('/make-sale', [App\Http\Controllers\SalersController::class, 'create_sales'])->name('-saleP');
     Route::get('/all-sales', [App\Http\Controllers\SalersController::class, 'all_sales'])->name('-all-sales');
+    Route::get('/search-result/{keyword}', [App\Http\Controllers\SalersController::class, 'searchResult'])->name('-print'); 
     Route::get('/load-discount/{id}', [App\Http\Controllers\SalersController::class, 'loader'])->name('-load-discount');
     Route::post('/save_sale', [App\Http\Controllers\SalersController::class, 'store'])->name('-save-sales');
     Route::get('/sale-invoice/{id}', [App\Http\Controllers\SalersController::class, 'sales_invoice'])->name('-sales-invoice');
     Route::get('/invoice-print/{id}', [App\Http\Controllers\SalersController::class, 'invoice_print'])->name('-print');
-
+  
+    
     
      //create notifaction
     Route::get('/notifaction', [App\Http\Controllers\NoticationsController::class, 'index'])->name('-notifaction');

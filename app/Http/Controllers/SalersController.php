@@ -6,8 +6,10 @@ use App\Models\Categories;
 use App\Models\Sales_invocie;
 use App\Models\Users;
 use App\Models\Discounts;
+use App\Models\Company_setup;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
  
 
 
@@ -22,7 +24,25 @@ class SalersController extends Controller
      */
     public function index()
     {
-        return view('sellers.dashboard');
+      $id = session()->get('id');
+      $daily_sales = Sales_invocie::where('user_id', $id)->whereDate('created_at', date("Y:m:d"))->get();
+      $monthly_sales = Sales_invocie::where('user_id', $id)->whereMonth('created_at', date('m'))->get();
+      $yearly_sales = Sales_invocie::where('user_id', $id)->whereYear('created_at', Carbon::now()->year)->get();
+
+      $totalDaily = $daily_sales->sum('amount');
+      $totalMonthly = $monthly_sales->sum('amount');
+      $totalYearly = $yearly_sales->sum('amount');
+
+      $daily_qty = $daily_sales->sum('qty');
+      $monthly_qty =  $monthly_sales->sum('qty');
+      $yearly_qty = $yearly_sales->sum('qty');
+
+      $product = Products::all();
+
+      return view('sellers.dashboard', compact('totalDaily','totalMonthly', 'totalYearly', 
+                                                'daily_qty', 'monthly_qty', 'yearly_qty',
+                                                  'daily_sales','monthly_sales','yearly_sales', 'product'));
+
     }
 
     /**
@@ -82,7 +102,7 @@ class SalersController extends Controller
             $sellers = Users::find("$id");
            $sales = Sales_invocie::where('user_id', $sellers->id)->where('customer_name', 'like', "%{$keyword}%")->get();
 
-         return view('seller.sales.load-sales-result', compact('sales','count'))->render();
+         return view('sellers.sales.load-sales-result', compact('sales','count'))->render();
     }
 
 
@@ -111,16 +131,20 @@ class SalersController extends Controller
 
       public function sales_invoice($id)
       {
+
+           $company = Company_setup::all();
            $invoice = Sales_invocie::find("$id");
 
-           return view('sellers.invoice.invoice', compact('invoice'));
+           return view('sellers.invoice.invoice', compact('invoice', 'company'));
       }
 
       public function invoice_print($id)
       {
+
+        $company = Company_setup::all();
         $invoice = Sales_invocie::find("$id");
 
-         return view('sellers.invoice.print-invoice', compact('invoice'));
+         return view('sellers.invoice.print-invoice', compact('invoice', 'company'));
       }
 
 
@@ -158,10 +182,13 @@ class SalersController extends Controller
                     $id = session()->get('id');
                     $user = Users::find("$id");
 
+
                     $product = Products::find($request->product);
                  
 
-                  $discount = Discounts::where('product_id', $request->product)->first(); 
+                  $discount = Discounts::where('product_id', $request->product)->first();
+                  
+                   
                   
             if($request->qty <= $product->qty )
             {
@@ -174,7 +201,7 @@ class SalersController extends Controller
                     $sales_invocie->product_id = $request->product; 
                     $sales_invocie->cat_id = $request->category; 
                     $sales_invocie->user_id = $user->id;
-                    $sales_invocie->discount_id = $discount->id;
+                   // $sales_invocie->discount_id = $discount->id;
                     $sales_invocie->invoice_no = $random;   
                     $sales_invocie->qty = $request->qty; 
                     $sales_invocie->amount =  $product_total_price; 
@@ -183,10 +210,15 @@ class SalersController extends Controller
                     $sales_invocie->customer_address = $request->customer_address;
                     $sales_invocie->save();
 
-                             // update qty
-                       $availbleStock =  $product->price - $request->qty;
-                       $product->qty = $availbleStock;
-                       $product->update();
+                                    // update qty
+                            $bal = $request->qty * $product->price;
+                          $remaining_val = $product->total_value - $bal;
+                          $availbleStock =  $product->qty - $request->qty;
+
+                          $product->qty = $availbleStock;
+                          $product->total_value = $remaining_val;
+                          $product->update();
+
 
                     return back()->with('success', 'Purchase was successfuly with normal price');
                     
@@ -198,7 +230,7 @@ class SalersController extends Controller
                           $discount_price = $request->product_discount_price;
                           $qty_discount = $request->product_qty_price;
 
-                          if($request->qty < $discount->product_qty || $discount->discount_per_product !== null || $discount->product_qty == null)
+                          if($request->qty < $discount->product_qty && $discount->discount_per_product !== null || $discount->product_qty == null)
                           {
                             $sales_invocie->product_id = $request->product; 
                             $sales_invocie->cat_id = $request->category; 
@@ -206,7 +238,7 @@ class SalersController extends Controller
                             $sales_invocie->discount_id = $discount->id;
                             $sales_invocie->invoice_no = $random;   
                             $sales_invocie->qty = $request->qty; 
-                            $sales_invocie->amount =  $discount_price; 
+                            $sales_invocie->amount =  $discount_price * $request->qty; 
                             $sales_invocie->customer_name = $request->customer_name; 
                             $sales_invocie->customer_phone = $request->customer_phone;
                             $sales_invocie->customer_address = $request->customer_address;
@@ -214,8 +246,11 @@ class SalersController extends Controller
                             $sales_invocie->save();
 
                                // update qty
-                            $availbleStock =  $product->price - $request->qty;
+                               $bal = $request->qty * $product->price;
+                               $remaining_val = $product->total_value - $bal;
+                            $availbleStock =  $product->qty - $request->qty;
                             $product->qty = $availbleStock;
+                            $product->total_value = $remaining_val;
                             $product->update();
 
                             return back()->with('success', 'Purchase was successfuly with discount price');
@@ -231,7 +266,7 @@ class SalersController extends Controller
                                 $sales_invocie->discount_id = $discount->id;
                                 $sales_invocie->invoice_no = $random;   
                                 $sales_invocie->qty = $request->qty; 
-                                $sales_invocie->amount =  $qty_discount; 
+                                $sales_invocie->amount =  $qty_discount * $request->qty; 
                                 $sales_invocie->customer_name = $request->customer_name; 
                                 $sales_invocie->customer_phone = $request->customer_phone;
                                 $sales_invocie->customer_address = $request->customer_address;
@@ -239,9 +274,12 @@ class SalersController extends Controller
                                 $sales_invocie->save();
 
                                  // update qty
-                                $availbleStock =  $product->price - $request->qty;
-                                $product->qty = $availbleStock;
-                                $product->update();
+                                 $bal = $request->qty * $product->price;
+                                 $remaining_val = $product->total_value - $bal;
+                              $availbleStock =  $product->qty - $request->qty;
+                              $product->qty = $availbleStock;
+                              $product->total_value = $remaining_val;
+                              $product->update();
 
                                 return back()->with('success', 'Purchase was successfuly with product qty promo price');
 

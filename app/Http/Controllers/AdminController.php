@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Users;
 use App\Models\Categories;
 use App\Models\Products;
+use App\Models\Sales_invocie;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 
 class AdminController extends Controller
@@ -20,7 +22,24 @@ class AdminController extends Controller
     public function index()
     {
 
-       return view('admin.dashboard');
+        
+        $daily_sales = Sales_invocie::whereDate('created_at', date("Y:m:d"))->get();
+        $monthly_sales = Sales_invocie::whereMonth('created_at', date('m'))->get();
+        $yearly_sales = Sales_invocie::whereYear('created_at', Carbon::now()->year)->get();
+  
+        $totalDaily = $daily_sales->sum('amount');
+        $totalMonthly = $monthly_sales->sum('amount');
+        $totalYearly = $yearly_sales->sum('amount');
+  
+        $daily_qty = $daily_sales->sum('qty');
+        $monthly_qty =  $monthly_sales->sum('qty');
+        $yearly_qty = $yearly_sales->sum('qty');
+  
+        $product = Products::all();
+  
+        return view('sellers.dashboard', compact('totalDaily','totalMonthly', 'totalYearly', 
+                                                  'daily_qty', 'monthly_qty', 'yearly_qty',
+                                                    'daily_sales','monthly_sales','yearly_sales', 'product'));
     }
 
     public function add_new()
@@ -28,6 +47,14 @@ class AdminController extends Controller
         $privilege = Users::all();
 
        return view('admin.add-sellers.add', compact('privilege'));
+    }
+
+    public function view_all_sales()
+    {
+        $count = 1;
+        $sales = Sales_invocie::all();
+
+       return view('admin.sales-overview.view', compact('sales','count'));
     }
 
     public function view()

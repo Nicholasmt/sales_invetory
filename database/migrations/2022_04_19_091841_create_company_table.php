@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('location');
             $table->string('contact');
-            $table->string('registration_number');
+            $table->string('cac');
             $table->smallInteger('active')->default(0);
             $table->timestamps();
         });

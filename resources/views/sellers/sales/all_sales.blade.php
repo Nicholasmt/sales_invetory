@@ -13,9 +13,9 @@
         <div class="card-block table-border-style">
             <form action="" class="">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search Sales" name="keyword">
+            <input type="text" class="form-control" placeholder="Enter Invocice Number" id="keyword">
             <div class="input-group-append">
-                <input class="btn btn-primary" type="submit" value="Search">
+                <a class="btn btn-primary" id="Search">Search</a>
             </div>
 		</div>
 			</form>
@@ -29,5 +29,11 @@
     </div>
 </div>
 
+
+@endsection
+
+@section('script')
+
+<script src="{{ asset('js/loader.js')}}"></script>
 
 @endsection
