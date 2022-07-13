@@ -29,42 +29,30 @@ Route::get('/logout', [App\Http\Controllers\IndexController::class, 'logout'])->
 
 Route::group(['prefix'=> 'admin', 'as'=>'admin', 'middleware' => 'admin'], function(){
 
-    Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('-dashbaord');
-    
-        //view employee
+  Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('-dashbaord');
+    //view employee
     Route::get('/salers', [App\Http\Controllers\AdminController::class, 'add_new'])->name('-add-new-sellers');
     Route::get('/view', [App\Http\Controllers\AdminController::class, 'view'])->name('-view_all');
-
     //view all sales
     Route::get('/view-all-sales', [App\Http\Controllers\AdminController::class, 'view_all_sales'])->name('-view-all-sales');
-
     //  product
     Route::get('/product', [App\Http\Controllers\AdminController::class, 'product'])->name('-products');
     Route::get('/view-product', [App\Http\Controllers\AdminController::class, 'view_product'])->name('-view-products');
     Route::post('/save-product', [App\Http\Controllers\ProductController::class, 'store'])->name('-saveProducts');
-    
     //category
     Route::get('/category', [App\Http\Controllers\AdminController::class, 'category'])->name('-cats');
     Route::post('/save-category', [App\Http\Controllers\CategoryController::class, 'store'])->name('-savecats');
-
     //product discounts
     Route::get('/discount', [App\Http\Controllers\DiscountController::class, 'index'])->name('-discount');
     Route::post('/save-discount', [App\Http\Controllers\DiscountController::class, 'store'])->name('-save-discount');
-
     //profile
     Route::resource('profile', App\Http\Controllers\AdminController::class);
-    // Route::get('/profile-update', [App\Http\Controllers\AdminController::class, 'updateProfile'])->name('-profile-update');
-    // Route::post('/save-update/{id}', [App\Http\Controllers\AdminController::class, 'saveUpdate'])->name('-save-update');
     Route::post('/update-password/{id}', [App\Http\Controllers\AdminController::class, 'updatePassword'])->name('-updatePassword');
-
     //Logs
     Route::get('/system-logs', [App\Http\Controllers\LogsController::class, 'index'])->name('-logs');
-
-    // company setup
-   Route::get('/comany-setup', [App\Http\Controllers\CompanyController::class, 'index'])->name('-company');
-   Route::post('/save-setup', [App\Http\Controllers\CompanyController::class, 'store'])->name('-save-setup');
-
-
+    //company setup
+    Route::get('/comany-setup', [App\Http\Controllers\CompanyController::class, 'index'])->name('-company');
+    Route::post('/save-setup', [App\Http\Controllers\CompanyController::class, 'store'])->name('-save-setup');
    });
    
 Route::group(['prefix' => 'saler', 'as' => 'saler', 'middleware' => 'saler'], function(){

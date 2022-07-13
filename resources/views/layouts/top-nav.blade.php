@@ -83,8 +83,8 @@
                   </a>
               </div>
               <ul class="pro-body">
-                <li><a href="{{ route('admin-profile-update')}}" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
-                <li><a href="{{ route('admin-profile')}}" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
+                <li><a href="{{ route('adminprofile.edit',['profile'=>session()->get('id') ])}}" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
+                <li><a href="{{ route('adminprofile.show',['profile'=>session()->get('id') ])}}" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
                 <li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
                 <li><a href="{{ route('logout')}}" class="dropdown-item"><i class="feather icon-lock"></i> Log out</a></li>
               </ul>

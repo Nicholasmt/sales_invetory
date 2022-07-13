@@ -78,28 +78,6 @@ class AdminController extends Controller
        return view('admin.category.add', compact('cats', 'count'));
     }
 
-    public function updateProfile()
-    {
-       $id = session()->get("id");
-       $user = Users::find("$id");
-    
-       return view('admin.profile.profile-update', compact('user'));
-    }
-
-    public function saveUpdate(Request $request, Users $user, $id)
-    {
-
-        $user = Users::find("$id");
-
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->address = $request->address;
-        $user->phone = $request->phone;
-        $user->update();
- 
-        return back()->with('success', 'Updated Successfully!');
-    }
-
     public function updatePassword(Request $request, Users $user, $id)
     {
         $rules=['old_password'=>'required',
@@ -113,11 +91,9 @@ class AdminController extends Controller
 
             return back()->withErrors($validate->errors());
         }
-
-        else
-        {
- 
-             if(Hash::check($request->old_password, $user->password))
+       else
+        { 
+           if(Hash::check($request->old_password, $user->password))
             {
 
                 $user = Users::find("$id");
@@ -132,8 +108,6 @@ class AdminController extends Controller
             {
                 return back()->with('error', 'fialed!, old password mismatch try again...');
             }
-            
-
        }
     }
 
@@ -157,7 +131,15 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Users::find("$id");
+
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->address = $request->address;
+        $user->phone = $request->phone;
+        $user->update();
+ 
+        return back()->with('success', 'Updated Successfully!');
     }
 
     /**
@@ -166,11 +148,11 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($profile)
     {
         $id = session()->get("id");
         $user = Users::find("$id");
-       return view('admin.profile.profile', compact('user'));
+       return view('admin.profile.show', compact('user'));
     }
 
     /**
@@ -179,9 +161,11 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($profile)
     {
-        //
+        $id = session()->get("id");
+        $user = Users::find("$id");
+       return view('admin.profile.edit', compact('user'));
     }
 
     /**
