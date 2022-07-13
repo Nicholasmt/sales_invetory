@@ -47,7 +47,7 @@
 		<li data-username="Table bootstrap datatable footable" class="nav-item">
             <a href="{{ route('admin-logs')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-server"></i></span><span class="pcoded-mtext">Sellers Logs</span></a>
         </li>
-@else
+  @else
         <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item active">
            <a href="{{ route('saler-dashbaord')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
         </li>
@@ -75,9 +75,7 @@
                 <span class="pcoded-mtext">Log out</span>
             </a>
         </li>
-
-
-     </ul>
+    </ul>
    </div>
 </div>
 <style>
