@@ -52,10 +52,10 @@ Route::group(['prefix'=> 'admin', 'as'=>'admin', 'middleware' => 'admin'], funct
     Route::post('/save-discount', [App\Http\Controllers\DiscountController::class, 'store'])->name('-save-discount');
 
     //profile
-    Route::get('/profile', [App\Http\Controllers\AdminController::class, 'profile'])->name('-profile');
-    Route::get('/profile-update', [App\Http\Controllers\AdminController::class, 'updateProfile'])->name('-profile-update');
-    Route::post('/save-update/{id}', [App\Http\Controllers\AdminController::class, 'saveUpdate'])->name('-save-update');
-    Route::post('/save-password/{id}', [App\Http\Controllers\AdminController::class, 'savePassword'])->name('-save-pass');
+    Route::resource('profile', App\Http\Controllers\AdminController::class);
+    // Route::get('/profile-update', [App\Http\Controllers\AdminController::class, 'updateProfile'])->name('-profile-update');
+    // Route::post('/save-update/{id}', [App\Http\Controllers\AdminController::class, 'saveUpdate'])->name('-save-update');
+    Route::post('/update-password/{id}', [App\Http\Controllers\AdminController::class, 'updatePassword'])->name('-updatePassword');
 
     //Logs
     Route::get('/system-logs', [App\Http\Controllers\LogsController::class, 'index'])->name('-logs');

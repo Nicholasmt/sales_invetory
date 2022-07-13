@@ -21,23 +21,17 @@ class AdminController extends Controller
      */
     public function index()
     {
-
-        
         $daily_sales = Sales_invocie::whereDate('created_at', date("Y:m:d"))->get();
         $monthly_sales = Sales_invocie::whereMonth('created_at', date('m'))->get();
         $yearly_sales = Sales_invocie::whereYear('created_at', Carbon::now()->year)->get();
-  
-        $totalDaily = $daily_sales->sum('amount');
+         $totalDaily = $daily_sales->sum('amount');
         $totalMonthly = $monthly_sales->sum('amount');
         $totalYearly = $yearly_sales->sum('amount');
-  
-        $daily_qty = $daily_sales->sum('qty');
+         $daily_qty = $daily_sales->sum('qty');
         $monthly_qty =  $monthly_sales->sum('qty');
         $yearly_qty = $yearly_sales->sum('qty');
-  
         $product = Products::all();
-  
-        return view('sellers.dashboard', compact('totalDaily','totalMonthly', 'totalYearly', 
+       return view('sellers.dashboard', compact('totalDaily','totalMonthly', 'totalYearly', 
                                                   'daily_qty', 'monthly_qty', 'yearly_qty',
                                                     'daily_sales','monthly_sales','yearly_sales', 'product'));
     }
@@ -84,14 +78,6 @@ class AdminController extends Controller
        return view('admin.category.add', compact('cats', 'count'));
     }
 
-    public function profile()
-    {
-        $id = session()->get("id");
-        $user = Users::find("$id");
-
-        return view('admin.profile.profile', compact('user'));
-    }
-
     public function updateProfile()
     {
        $id = session()->get("id");
@@ -114,7 +100,7 @@ class AdminController extends Controller
         return back()->with('success', 'Updated Successfully!');
     }
 
-    public function savePassword(Request $request, Users $user, $id)
+    public function updatePassword(Request $request, Users $user, $id)
     {
         $rules=['old_password'=>'required',
                  'new_password'=>'required|min:8|same:confirm_password',
@@ -182,7 +168,9 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        //
+        $id = session()->get("id");
+        $user = Users::find("$id");
+       return view('admin.profile.profile', compact('user'));
     }
 
     /**
