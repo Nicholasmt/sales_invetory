@@ -13,7 +13,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-md-6">
-                        <form action="{{ route('admin-saveProducts')}}" method="POST">
+                        <form action="{{ route('adminproducts.update',['product'=>$product])}}" method="POST">
                             @csrf
 
                             <div class="form-group">
@@ -53,7 +53,7 @@
 
                     <div class="col-md-12">
 
-                 <!-- <input type="submit" class="btn btn-primary" value="Create"> -->
+                
 
                     </div>
 

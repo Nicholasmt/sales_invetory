@@ -29,13 +29,12 @@ Route::get('/logout', [App\Http\Controllers\IndexController::class, 'logout'])->
 
 Route::group(['prefix'=> 'admin', 'as'=>'admin', 'middleware' => 'admin'], function(){
 
-    Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('-dashbaord');
+    Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('-dashboard');
     //view employee
     Route::get('/salers', [App\Http\Controllers\AdminController::class, 'add_new'])->name('-add-new-sellers');
     Route::get('/view', [App\Http\Controllers\AdminController::class, 'view'])->name('-view_all');
     //view all sales
     Route::get('/view-all-sales', [App\Http\Controllers\AdminController::class, 'view_all_sales'])->name('-view-all-sales');
-    //  product
     Route::resource('products', App\Http\Controllers\ProductController::class);
     Route::resource('categories', App\Http\Controllers\CategoryController::class); 
     Route::resource('discounts', App\Http\Controllers\DiscountController::class);

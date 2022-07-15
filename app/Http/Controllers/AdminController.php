@@ -31,7 +31,7 @@ class AdminController extends Controller
         $monthly_qty =  $monthly_sales->sum('qty');
         $yearly_qty = $yearly_sales->sum('qty');
         $product = Products::all();
-       return view('sellers.dashboard', compact('totalDaily','totalMonthly', 'totalYearly', 
+       return view('admin.dashboard',compact('totalDaily','totalMonthly', 'totalYearly', 
                                                   'daily_qty', 'monthly_qty', 'yearly_qty',
                                                     'daily_sales','monthly_sales','yearly_sales', 'product'));
     }
@@ -56,26 +56,6 @@ class AdminController extends Controller
         $count = 1;
         $sellers = Users::where('role_id', 2)->get();
        return view('admin.add-sellers.view',compact('sellers', 'count'));
-    }
-
-    public function product()
-    {
-        $cat = Categories::all();  
-       return view('admin.products.add', compact('cat'));
-    }
-
-    public function view_product()
-    {
-        $count = 1;
-        $products = Products::all();  
-       return view('admin.products.view', compact('products', 'count'));
-    }
-
-    public function category()
-    {
-        $count = 1;
-        $cats = Categories::all();  
-       return view('admin.category.add', compact('cats', 'count'));
     }
 
      

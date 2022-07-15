@@ -17,10 +17,10 @@
                 <hr>
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                    <li class="nav-item">
-                       <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Compnay Details</a>
+                       <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"> <i class="fa fa-home"></i> Compnay Details</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Add New</a>
+                      <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><i class="fa fa-plus"></i> Setup</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
@@ -52,7 +52,10 @@
                                         <td>{{$c->contact}}</td>
                                         <td>{{$c->registration_number}}</td>
                                         <td>{{$c->created_at->diffForHumans()}}</td>
-                                        <td><a href="" class="btn btn-primary"> Edit</a></td>
+                                        <td>
+                                            <a href="" class="btn btn-primary"> <i class="fa fa-edit"></i></a>
+                                            <span><a href="" class="btn btn-danger"> <i class="fa fa-trash"></i></a></span>
+                                        </td>
                                       </tr>
                                   @endforeach 
                                   @endif
