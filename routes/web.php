@@ -36,14 +36,9 @@ Route::group(['prefix'=> 'admin', 'as'=>'admin', 'middleware' => 'admin'], funct
     //view all sales
     Route::get('/view-all-sales', [App\Http\Controllers\AdminController::class, 'view_all_sales'])->name('-view-all-sales');
     //  product
-    Route::get('/product', [App\Http\Controllers\AdminController::class, 'product'])->name('-products');
-    Route::get('/view-product', [App\Http\Controllers\AdminController::class, 'view_product'])->name('-view-products');
-    Route::post('/save-product', [App\Http\Controllers\ProductController::class, 'store'])->name('-saveProducts');
-    //category
-    Route::get('/category', [App\Http\Controllers\AdminController::class, 'category'])->name('-cats');
-    Route::post('/save-category', [App\Http\Controllers\CategoryController::class, 'store'])->name('-savecats');
-    //product discounts
-    Route::resource('profile', App\Http\Controllers\AdminController::class);
+    Route::resource('products', App\Http\Controllers\ProductController::class);
+    Route::resource('categories', App\Http\Controllers\CategoryController::class); 
+    Route::resource('discounts', App\Http\Controllers\DiscountController::class);
     Route::resource('profile', App\Http\Controllers\AdminController::class);
     Route::get('/system-logs', [App\Http\Controllers\LogsController::class, 'index'])->name('-logs');
     Route::get('/comany-setup', [App\Http\Controllers\CompanyController::class, 'index'])->name('-company');
@@ -65,7 +60,7 @@ Route::group(['prefix' => 'saler', 'as' => 'saler', 'middleware' => 'saler'], fu
     Route::post('/save_sale', [App\Http\Controllers\SalersController::class, 'store'])->name('-save-sales');
     Route::get('/sale-invoice/{id}', [App\Http\Controllers\SalersController::class, 'sales_invoice'])->name('-sales-invoice');
     Route::get('/invoice-print/{id}', [App\Http\Controllers\SalersController::class, 'invoice_print'])->name('-printInvoice');
-    //create notifaction
     Route::get('/notifaction', [App\Http\Controllers\NoticationsController::class, 'index'])->name('-notifaction');
+    Route::resource('profile', App\Http\Controllers\AdminController::class);
  
 });

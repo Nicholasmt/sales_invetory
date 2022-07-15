@@ -11,7 +11,11 @@
                 <hr>
                 <div class="row">
                     <div class="col-md-6">
+                    @if (Session::get('user_auth') == true && Session::get('privilege') == 1)
                         <form action="{{ route('adminprofile.update',['profile'=>$user->id])}}" method="POST">
+                    @else
+                         <form action="{{ route('salerprofile.update',['profile'=>$user->id])}}" method="POST">
+                    @endif
                             @csrf
                             @method('PATCH')
                             <div class="form-group">
@@ -50,7 +54,11 @@
                 </div>
                 <div class="col-md-6">
                   <h5>Security</h5>
-                       <form action="{{ route('adminprofile.update',['profile'=>$user->id])}}" method="POST">
+                  @if (Session::get('user_auth') == true && Session::get('privilege') == 1)
+                        <form action="{{ route('adminprofile.update',['profile'=>$user->id])}}" method="POST">
+                    @else
+                         <form action="{{ route('salerprofile.update',['profile'=>$user->id])}}" method="POST">
+                    @endif
                            @csrf
                            @method('PATCH')
                             <div class="form-group">
