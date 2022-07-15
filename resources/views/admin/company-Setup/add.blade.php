@@ -4,12 +4,9 @@
 
 
 @section('header')
-
-    <link href="{{ asset('assets/css/datatables.min.css')}}" rel="stylesheet">
-
-    @endsection
-
-    <div class="col-sm-12">
+  <link href="{{ asset('assets/css/datatables.min.css')}}" rel="stylesheet">
+@endsection
+ <div class="col-sm-12">
            <h5>Company</h5>
               <hr>
                <ul class="nav nav-tabs" id="myTab" role="tablist">

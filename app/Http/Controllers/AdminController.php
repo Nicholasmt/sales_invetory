@@ -129,16 +129,13 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $profile)
     {
-        $user = Users::find("$id");
-
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->address = $request->address;
-        $user->phone = $request->phone;
-        $user->update();
- 
+        $user = Users::where('id',$profile)->update(['first_name'=>$request->first_name,
+                                                 'last_name'=>$request->last_name,
+                                                 'address'=> $request->address,
+                                                 'phone'=>$request->phone
+                                                ]);
         return back()->with('success', 'Updated Successfully!');
     }
 

@@ -71,7 +71,7 @@
         </li>
         <li>
           <div class="dropdown drp-user">
-            <a href="{{ route('admin-profile-update')}}" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="icon feather icon-settings"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right profile-notification">

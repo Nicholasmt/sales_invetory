@@ -33,8 +33,8 @@
          </div> 
         <div class="col-md-6 form-group">
            <label class="btn btn-info move">{{$user->address}}</label>
-         </div> 
-         </div>
+           </div> 
+          </div>
         </div>
      <div class="card">
        <div class="card-header" id="headingTwo">

@@ -13,13 +13,12 @@
                 <hr>
                 <div class="row">
                     <div class="col-md-6">
-                        <form action="{{ route('admin-save-update',$user->id)}}" method="POST">
+                        <form action="{{ route('adminprofile.store',['profile'=>$user->id])}}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="exampleInputEmail1">First Name</label>
                                 <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{$user->first_name}}" name="first_name">
-                                <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                            </div>
+                             </div>
 
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Last Name</label>
@@ -52,7 +51,7 @@
 
                     <h5>Security</h5>
 
-                       <form action="{{ route('admin-save-pass',$user->id)}}" method="POST">
+                       <form action="{{ route('admin-updatePassword',$user->id)}}" method="POST">
                            @csrf
                             <div class="form-group">
                                 <label>Old Password</label>
