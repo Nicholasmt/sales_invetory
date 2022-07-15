@@ -78,41 +78,7 @@ class AdminController extends Controller
        return view('admin.category.add', compact('cats', 'count'));
     }
 
-    public function updatePassword(Request $request, Users $user, $id)
-    {
-        $rules=['old_password'=>'required',
-                 'new_password'=>'required|min:8|same:confirm_password',
-                   'confirm_password'=>'required|min:8'];
-        $messages=[];
-
-        $validate = Validator::make($request->all(), $rules, $messages);
-
-        if($validate->fails()){
-
-            return back()->withErrors($validate->errors());
-        }
-       else
-        { 
-           if(Hash::check($request->old_password, $user->password))
-            {
-
-                $user = Users::find("$id");
-
-                $user->passowrd = $request->confirm_password;
-                $user->update();
-                
-                return back()->with('success', 'updated successfully!');
-            }
-
-            else
-            {
-                return back()->with('error', 'fialed!, old password mismatch try again...');
-            }
-       }
-    }
-
-
-
+     
     /**
      * Show the form for creating a new resource.
      *
@@ -129,14 +95,9 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $profile)
+    public function store(Request $request)
     {
-        $user = Users::where('id',$profile)->update(['first_name'=>$request->first_name,
-                                                 'last_name'=>$request->last_name,
-                                                 'address'=> $request->address,
-                                                 'phone'=>$request->phone
-                                                ]);
-        return back()->with('success', 'Updated Successfully!');
+       
     }
 
     /**
@@ -172,9 +133,54 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $profile)
     {
-        //
+      $user = Users::find("$profile");
+       if($request->has('updateProfile'))
+       {
+         if(Hash::check($request->password, $user->password))
+          {
+           $user = Users::where('id',$profile)->update(['first_name'=>$request->first_name,
+                                                        'last_name'=>$request->last_name,
+                                                        'address'=> $request->address,
+                                                        'phone'=>$request->phone
+                                                       ]);
+             return back()->with('success', 'Updated Successfully!');
+          }
+          else
+            {
+                return back()->with('error','Password mismatch try again...');
+            }
+       }
+        elseif($request->has('updatePassword'))
+        {
+            $rules=['old_password'=>'required',
+                     'new_password'=>'required|min:8|same:confirm_password',
+                       'confirm_password'=>'required|min:8'
+                   ];
+             $validate = Validator::make($request->all(), $rules);
+           if($validate->fails())
+            {
+             return back()->withErrors($validate->errors());
+            }
+          else
+            { 
+               if(Hash::check($request->old_password, $user->password))
+                {
+                    $user = Users::where('id',$profile)->update(['password'=>$request->confirm_password]);
+                    return back()->with('success', 'updated successfully!');
+                }
+              else
+                {
+                    return back()->with('error', 'fialed!, old password mismatch try again...');
+                }
+            }
+        }
+        else
+        {
+           return back();
+        }
+      
     }
 
     /**

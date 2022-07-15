@@ -43,14 +43,9 @@ Route::group(['prefix'=> 'admin', 'as'=>'admin', 'middleware' => 'admin'], funct
     Route::get('/category', [App\Http\Controllers\AdminController::class, 'category'])->name('-cats');
     Route::post('/save-category', [App\Http\Controllers\CategoryController::class, 'store'])->name('-savecats');
     //product discounts
-    Route::get('/discount', [App\Http\Controllers\DiscountController::class, 'index'])->name('-discount');
-    Route::post('/save-discount', [App\Http\Controllers\DiscountController::class, 'store'])->name('-save-discount');
-    //profile
     Route::resource('profile', App\Http\Controllers\AdminController::class);
-    Route::post('/update-password/{id}', [App\Http\Controllers\AdminController::class, 'updatePassword'])->name('-updatePassword');
-    //Logs
+    Route::resource('profile', App\Http\Controllers\AdminController::class);
     Route::get('/system-logs', [App\Http\Controllers\LogsController::class, 'index'])->name('-logs');
-    //company setup
     Route::get('/comany-setup', [App\Http\Controllers\CompanyController::class, 'index'])->name('-company');
     Route::post('/save-setup', [App\Http\Controllers\CompanyController::class, 'store'])->name('-save-setup');
    });
