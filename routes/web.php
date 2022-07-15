@@ -39,10 +39,10 @@ Route::group(['prefix'=> 'admin', 'as'=>'admin', 'middleware' => 'admin'], funct
     Route::resource('products', App\Http\Controllers\ProductController::class);
     Route::resource('categories', App\Http\Controllers\CategoryController::class); 
     Route::resource('discounts', App\Http\Controllers\DiscountController::class);
+    Route::resource('company', App\Http\Controllers\CompanyController::class);
     Route::resource('profile', App\Http\Controllers\AdminController::class);
     Route::get('/system-logs', [App\Http\Controllers\LogsController::class, 'index'])->name('-logs');
-    Route::get('/comany-setup', [App\Http\Controllers\CompanyController::class, 'index'])->name('-company');
-    Route::post('/save-setup', [App\Http\Controllers\CompanyController::class, 'store'])->name('-save-setup');
+       
    });
    
 Route::group(['prefix' => 'saler', 'as' => 'saler', 'middleware' => 'saler'], function(){
