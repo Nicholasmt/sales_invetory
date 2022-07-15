@@ -19,30 +19,22 @@
             <a href="{{ route('admin-dashbaord')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
         </li>
         <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">
-            <a href="{{ route('admin-view-all-sales')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Sales Record</span></a>
+            <a href="{{ route('admin-view-all-sales')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Sales Records</span></a>
         </li>
         <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">
-            <a href="{{ route('admin-company')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Company Setup</span></a>
-        </li>
-        <li data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds" class="nav-item pcoded-hasmenu">
-          <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Employees</span></a>
-            <ul class="pcoded-submenu">
-                <li class=""><a href="{{ route('admin-add-new-sellers')}}" class="">Add<span class="pcoded-badge label label-danger">NEW</span></a></li>
-                <li class=""><a href="{{ route('admin-view_all')}}" class="">View</a></li>
-            </ul>
+          <a href="{{ route('admincompany.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Company Setup</span></a>
         </li>
         <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">
-           <a href="{{ route('admin-cats')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Categories</span></a>
-        </li>
-		<li data-username="Authentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe" class="nav-item pcoded-hasmenu">
-          <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Products</span></a>
-          <ul class="pcoded-submenu">
-            <li class=""><a href="{{ route('admin-products')}}" class="">Add<span class="pcoded-badge label label-danger">NEW</span></a></li>
-            <li class=""><a href="{{ route('admin-view-products')}}" class=""  >View</a></li>
-          </ul>
+          <a href="{{ route('admincompany.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Employees</span></a>
         </li>
         <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">
-          <a href="{{ route('admin-discount')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Promo</span></a>
+           <a href="{{ route('admincategories.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Categories</span></a>
+        </li>
+		<li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">
+          <a href="{{ route('admincompany.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Products</span></a>
+        </li>
+        <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">
+          <a href="{{ route('admindiscount.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Discounts</span></a>
         </li>
 		<li data-username="Table bootstrap datatable footable" class="nav-item">
             <a href="{{ route('admin-logs')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-server"></i></span><span class="pcoded-mtext">Sellers Logs</span></a>

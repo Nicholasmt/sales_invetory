@@ -17,7 +17,7 @@ class CompanyController extends Controller
     {
         $count =1;
         $company = Company_setup::all();
-         return view('admin.company-Setup.add', compact('company','count'));
+        return view('admin.company-Setup.add', compact('company','count'));
 
     }
 
