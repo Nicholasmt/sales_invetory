@@ -55,16 +55,13 @@ class ProductController extends Controller
                 }
                 else
                 {
-
                    $value = $request->price * $request->qty;
-
                    $product->product_name = $request->product_name;
                    $product->price = $request->price;
                    $product->cat_id = $request->category;
                    $product->qty = $request->qty;
                    $product->total_value = $value;
                    $product->save();
-
                    return back()->with('success', 'Product Added Successfully!');
 
                 }
@@ -90,9 +87,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Products $product)
     {
-        //
+       $categories = Categories::all();
+       return view('admin.products.edit',compact('product','categories'));
     }
 
     /**
