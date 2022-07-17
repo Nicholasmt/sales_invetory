@@ -23,6 +23,8 @@ class SellerAuth
 
         else
         {
+            $id = session()->get('id');
+            $log = Logs::where('user_id', $id)->where('logout_time', null)->update(['logout_time'=> date("Y:m:d:H:i:s")]);
             return redirect('sign-in')->with('error', 'You are not allowed to view this Resources!');
         }
        

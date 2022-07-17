@@ -122,8 +122,6 @@ class IndexController extends Controller
          {
               $id = session()->get('id');
               $log = Logs::where('user_id', $id)->where('logout_time', null)->first();
-
-              
               $log->logout_time = date("Y:m:d:H:i:s");
               $log->update();
 

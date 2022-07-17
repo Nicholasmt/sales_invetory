@@ -17,10 +17,9 @@ class DiscountController extends Controller
     public function index()
     {
         $count = 1;
-        $discount = Discounts::all();
-        $product = Products::all();
-
-        return view('admin.promo.discount', compact('discount', 'count', 'product'));
+        $discounts = Discounts::all();
+        $products = Products::all();
+        return view('admin.promo.index', compact('discounts', 'count', 'products'));
     }
 
     /**
@@ -163,9 +162,10 @@ class DiscountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Discounts $discount)
     {
-        //
+        $products = Products::all();
+        return view('admin.promo.edit', compact('discount','products'));
     }
 
     /**

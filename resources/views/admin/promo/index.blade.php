@@ -13,42 +13,28 @@
               <hr>
                <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active text-uppercase" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Create Discount</a>
+                    <a class="nav-link active text-uppercase" id="home-tab" data-toggle="tab" href="{{ route('admin-dashboard')}}" role="tab" aria-controls="home" aria-selected="true">Dashboard</a>
                 </li>
-
+			</ul>
 
               <div class="col-sm-12">
                 <h5 class="mt-4">Create Promo Discount for your Products</h5>
                 <hr>
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Dsicounts</a>
+                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"> <i class="fa fa-calendar"></i> PROMO DISCOUNT</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Create Discount</a>
+                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"> <i class="fa fa-plus"></i>  ADD</a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
-                    </li> -->
+                    
                 </ul>
 
                 <div class="tab-content" id="pills-tabContent">
 					
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 						
-                       <!-- <div class="card-block table-border-style">
-                        <form action="" class="">
-                          <div class="input-group">
-                           <input type="text" class="form-control" placeholder="Search Salers" name="keyword">
-                             <div class="input-group-append">
-                            <input class="btn btn-primary" type="submit" value="Search">
-                        </div>
-                    </div>
-                  </form> -->
-               
-
-                    </div>
-                        <div class="table-responsive">
+                     <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -67,26 +53,31 @@
                                 </thead>
                                 <tbody>
                                     
-                                @if($discount->count() == 0 )
+                                @if($discounts->count() == 0 )
 
                                 <td scope="row"><label class="btn btn-info"> No data Found</label></td>
 
                                 @else
                                                                 
 
-                                @foreach ($discount as $d)
+                                @foreach ($discounts as $discount)
                                     <tr>
                                         
                                         <td scope="row">{!!$count++;!!}</td>
-                                        <td class="table-row">{{$d->product->product_name}}</td>
-                                        <td class="table-row">#{{$d->product->price}}</td>
-                                        <td class="table-row">{{$d->discount_rate}}%</td>
-                                        <td class="table-row">#{{$d->discount_per_product}}</td>
-                                        <td class="table-row">{{$d->product_qty}} (qty)</td>
-                                        <td class="table-row">{{$d->qty_rate}}%</td>
-                                        <td>#{{$d->qty_price}}</td>
-                                        <td>{{$d->created_at->diffForHumans()}}</td>
-                                        <td><a href="" class="btn btn-danger"> Delete</a></td>
+                                        <td class="table-row">{{$discount->product->product_name}}</td>
+                                        <td class="table-row">#{{$discount->product->price}}</td>
+                                        <td class="table-row">{{$discount->discount_rate}}%</td>
+                                        <td class="table-row">#{{$discount->discount_per_product}}</td>
+                                        <td class="table-row">{{$discount->product_qty}} (qty)</td>
+                                        <td class="table-row">{{$discount->qty_rate}}%</td>
+                                        <td>#{{$discount->qty_price}}</td>
+                                        <td>{{$discount->created_at->diffForHumans()}}</td>
+                                        <td>
+                                            <a href="{{ route('admindiscounts.edit',['discount'=>$discount])}}" class="btn btn-primary"> <i class="fa fa-edit"></i></a>
+                                            <span>
+                                            <a href="" class="btn btn-danger"> <i class="fa fa-trash"></i></a>  
+                                            </span>
+                                        </td>
                                    
                                     </tr>
                                 
@@ -106,21 +97,21 @@
 
                       <h5 class="mt-4">Discount Per Product</h5>
 
-                        <form method="POST" action="{{ route('admin-save-discount')}}">
+                        <form method="POST" action="{{ route('admindiscounts.store')}}">
                             @csrf
                               <div class="form-group">
                                 <label for="exampleFormControlSelect1">Select Product</label>
-                                <select class="form-control" id="exampleFormControlSelect1" name="product">
-                                <option disabled selected> Select Product</option></option>
-                                    @foreach ($product as $p)
-                                      <option value="{{$p->id}}">{{$p->product_name}}</option>
+                                <select class="form-control"   name="product">
+                                <option disabled selected> Select Product</option>
+                                    @foreach ($products as $product)
+                                      <option value="{{$product->id}}">{{$product->product_name}}</option>
                                     @endforeach
                                   </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="exampleInputEmail1"> Discount Rate Per Product</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Percentage Number" name="discount_rate">
+                                <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Percentage Number" name="discount_rate">
                                 <small id="emailHelp" class="form-text text-muted">Enter Percentage Rate</small>
                             </div>
 
@@ -137,29 +128,29 @@
 
                         <h5 class="mt-4">Quantity Discount Promo</h5>
 
-					<form method="POST" action="{{ route('admin-save-discount')}}">
+					<form method="POST" action="{{ route('admindiscounts.store')}}">
                         @csrf
 							
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Select Product</label>
-                                <select class="form-control" id="exampleFormControlSelect1" name="product">
-                                <option disabled selected> Select Product</option></option>
-                                    @foreach ($product as $p)
-                                      <option value="{{$p->id}}">{{$p->product_name}}</option>
+                                <select class="form-control"   name="product">
+                                <option disabled selected> Select Product</option>
+                                    @foreach ($products as $product)
+                                      <option value="{{$product->id}}">{{$product->product_name}}</option>
                                     @endforeach
                                   </select>
                             </div>
 								
 								  <div class="form-group">
                                 <label for="exampleInputPassword1">Product Quantity </label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder=" Enter Number of Product" name="product_qty">
+                                <input type="text" class="form-control"   placeholder=" Enter Number of Product" name="product_qty">
                                 <small id="emailHelp" class="form-text text-muted">Enter Number of Product Quantity for Promo </small>
                             </div>
 
 								
 								<div class="form-group">
                                 <label for="exampleInputPassword1">  Quantity Rate</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder=" Enter Number of Percentage" name="qty_rate">
+                                <input type="text" class="form-control"   placeholder=" Enter Number of Percentage" name="qty_rate">
                                 <small id="emailHelp" class="form-text text-muted">Enter Percentage Rate </small>
                             </div>
 
@@ -171,11 +162,11 @@
 						
                         </div>
                     </div>
- 
+                   </div>
                 </div>
             </div>
-        </div>
-	</div>
+ 
+ 
 
  
      <style>
@@ -197,10 +188,7 @@
       <script src="{{ asset('js/dataTables/dataTables.bootstrap4.min.js')}}"></script>  
      
      <script>
-
- 
-
-            $(document).ready(function(){
+       $(document).ready(function(){
                 $('.table').DataTable({
                     pageLength: 10,
                     responsive: true,
