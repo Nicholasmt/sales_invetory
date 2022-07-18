@@ -10,11 +10,11 @@
                 <h5>Update</h5>
                 <hr>
                 <div class="row">
+                <form action="{{ route('adminproducts.update',['product'=>$product])}}" method="POST">
+                    @csrf
+                    @method('PATCH')
                     <div class="col-md-6">
-                      <form action="{{ route('adminproducts.update',['product'=>$product])}}" method="POST">
-                            @csrf
-                            @method('PATCH')
-                            <div class="form-group">
+                        <div class="form-group">
                                 <label for="exampleInputEmail1"> Product Name</label>
                                 <input type="text" class="form-control" value="{{$product->product_name}}" aria-describedby="emailHelp" placeholder="Enter Product Name" name="product_name">
                             </div>
@@ -39,8 +39,26 @@
                                 </select>
                             </div>
                              <input type="submit" class="btn btn-primary" value="Update" >
-                      </form>
-                    </div>
+                       </div>
+                       <div class="col-md-6">
+                           <div class="form-group">
+                                <label for="exampleFormControlSelect1">Select Product</label>
+                                <select class="form-control"   name="product">
+                                <option disabled selected> Select Product</option>
+                                    @foreach ($products as $product)
+                                      <option value="{{$product->id}}">{{$product->product_name}}</option>
+                                    @endforeach
+                                  </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"> Discount Rate Per Product</label>
+                                <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Percentage Number" name="discount_rate">
+                                <small id="emailHelp" class="form-text text-muted">Enter Percentage Rate</small>
+                            </div>
+                           <input type="submit" class="btn btn-primary" value="Create" >
+                       </div>
+                </form>
                  </div>
             </div>
         </div>
