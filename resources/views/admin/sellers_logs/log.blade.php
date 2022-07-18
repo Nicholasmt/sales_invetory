@@ -9,12 +9,12 @@
         <hr>
          <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-                <!-- <a class="nav-link active text-uppercase" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Categories</a> -->
+              <!-- <a class="nav-link active text-uppercase" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Categories</a> -->
             </li>
             <div class="col-sm-12">
               <h5 class="mt-4">Logs</h5>
               <hr>
-          <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+           <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Logs</a>
             </li>
