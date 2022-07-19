@@ -7,15 +7,15 @@
                 <h5>Add New Salers</h5>
             </div>
             <div class="card-body">
-                <h5>Personal Information</h5>
+            <h5>Personal Information</h5>
                 <hr>
                 <div class="row">
                     <div class="col-md-6">
                     @if (Session::get('user_auth') == true && Session::get('privilege') == 1)
                         <form action="{{ route('adminprofile.update',['profile'=>$user->id])}}" method="POST">
-                    @else
+                        @else
                          <form action="{{ route('salerprofile.update',['profile'=>$user->id])}}" method="POST">
-                    @endif
+                          @endif
                             @csrf
                             @method('PATCH')
                             <div class="form-group">

@@ -40,6 +40,7 @@ Route::group(['prefix'=> 'admin', 'as'=>'admin', 'middleware' => 'admin'], funct
     Route::resource('discounts', App\Http\Controllers\DiscountController::class);
     Route::resource('company', App\Http\Controllers\CompanyController::class);
     Route::resource('profile', App\Http\Controllers\AdminController::class);
+    Route::resource('users', App\Http\Controllers\UsersController::class);
     Route::get('/system-logs', [App\Http\Controllers\LogsController::class, 'index'])->name('-logs');
        
    });

@@ -13,7 +13,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-       
+        $id = session()->get('id');
+        $users = Users::find("$id");
+        return view('admin.employees.index',compact('$users'));
     }
 
     /**

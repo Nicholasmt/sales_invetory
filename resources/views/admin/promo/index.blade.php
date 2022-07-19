@@ -43,21 +43,51 @@
                               </thead>
                                 <tbody>
                                 @if($discounts->count() == 0 )
-                                    <td scope="row"><label class="btn btn-info"> No data Found</label></td>
+                                    <td scope="row"><label class="badge badge-info"> No data Found</label></td>
                                     @else
                                     @foreach ($discounts as $discount)
                                     <tr>
                                             <td scope="row">{!!$count++;!!}</td>
                                             <td class="table-row">{{$discount->product->product_name}}</td>
                                             <td class="table-row">#{{$discount->product->price}}</td>
-                                            <td class="table-row">{{$discount->discount_rate}}%</td>
-                                            <td class="table-row">#{{$discount->discount_per_product}}</td>
-                                            <td class="table-row">{{$discount->product_qty}} (qty)</td>
-                                            <td class="table-row">{{$discount->qty_rate}}%</td>
-                                            <td>#{{$discount->qty_price}}</td>
+                                            <td class="table-row">
+                                            @if ($discount->discount_rate == null)
+                                              <label class="badge badge-info">No Data</label> 
+                                               @else
+                                               {{$discount->discount_rate}} %  
+                                            @endif
+                                            </td>
+                                            <td class="table-row">
+                                              @if ($discount->discount_per_product == null)
+                                              <label class="badge badge-info">No Data</label> 
+                                               @else 
+                                               #{{$discount->discount_per_product}}
+                                              @endif
+                                            </td>
+                                            <td class="table-row">
+                                              @if ($discount->product_qty == null)
+                                              <label class="badge badge-info">No Data</label> 
+                                               @else
+                                               {{$discount->product_qty}} (qty)  
+                                              @endif
+                                              </td>
+                                            <td class="table-row">
+                                             @if ($discount->qty_rate == null)
+                                              <label class="badge badge-info">No Data</label> 
+                                               @else
+                                               {{$discount->qty_rate}}% 
+                                             @endif
+                                            </td>
+                                            <td>
+                                            @if ($discount->qty_price== null)
+                                               <label class="badge badge-info">No Data</label> 
+                                               @else
+                                               #{{$discount->qty_price}} 
+                                            @endif
+                                            </td>
                                             <td>{{$discount->created_at->diffForHumans()}}</td>
                                         <td>
-                                        <td>
+                                        
                                         <a href="{{ route('admindiscounts.edit',['discount'=>$discount])}}" class="btn btn-primary"> <i class="fa fa-edit"></i></a>
                                          <span>
                                            <a href="" class="btn btn-danger"> <i class="fa fa-trash"></i></a>  
@@ -69,57 +99,59 @@
                             </tbody>
                         </table>
                      </div>
-			    </div>
+			          </div>
                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                   <div class="row">
-                    <form method="POST" action="{{ route('admindiscounts.store')}}">
-                        @csrf
-                        <div class="col-md-6">
-                          <h5 class="mt-4">Discount Per Product</h5>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Select Product</label>
-                                <select class="form-control"   name="product">
-                                   <option disabled selected> Select Product</option>
-                                      @foreach ($products as $product)
-                                   <option value="{{$product->id}}">{{$product->product_name}}</option>
-                                      @endforeach
-                                 </select>
-                             </div>
-                             <div class="form-group">
-                                <label for="exampleInputEmail1"> Discount Rate Per Product</label>
-                                <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Percentage Number" name="discount_rate">
-                                <small id="emailHelp" class="form-text text-muted">Enter Percentage Rate</small>
-                             </div>
-                              <input type="submit" class="btn btn-primary" value="Create" >
-                        </div>
+                    <div class="col-md-6">
+					       <form method="POST" action="{{ route('admindiscounts.store')}}">
+                  @csrf
+                  <h5 class="mt-4">Discount Per Product</h5>
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Select Product</label>
+                        <select class="form-control"   name="product">
+                            <option disabled selected> Select Product</option>
+                              @foreach ($products as $product)
+                            <option value="{{$product->id}}">{{$product->product_name}}</option>
+                              @endforeach
+                          </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1"> Discount Rate Per Product</label>
+                        <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Percentage Number" name="discount_rate">
+                        <small id="emailHelp" class="form-text text-muted">Enter Percentage Rate</small>
+                      </div>
+                    <input type="submit" class="btn btn-primary" name="single_discount" value="Submit">
+						    </form>
+            </div>
 						<div class="col-md-6">
-                           <h5 class="mt-4">Quantity Discount Promo</h5>
-                             
-                              @csrf
+              <h5 class="mt-4">Quantity Discount Promo</h5>
+					    <form method="POST" action="{{ route('admindiscounts.store')}}">
+              @csrf
 							 <div class="form-group">
-                                <label for="exampleFormControlSelect1">Select Product</label>
-                                <select class="form-control"   name="product">
-                                   <option disabled selected> Select Product</option>
-                                     @foreach ($products as $product)
-                                   <option value="{{$product->id}}">{{$product->product_name}}</option>
-                                    @endforeach
-                                 </select>
-                              </div>
+                   <label for="exampleFormControlSelect1">Select Product</label>
+                    <select class="form-control"   name="product">
+                      <option disabled selected> Select Product</option>
+                        @foreach ($products as $product)
+                      <option value="{{$product->id}}">{{$product->product_name}}</option>
+                      @endforeach
+                    </select>
+                </div>
 							  <div class="form-group">
-                                <label for="exampleInputPassword1">Product Quantity </label>
-                                <input type="text" class="form-control"   placeholder=" Enter Number of Product" name="product_qty">
-                                <small id="emailHelp" class="form-text text-muted">Enter Number of Product Quantity for Promo </small>
-                              </div>
-                             <div class="form-group">
-                                <label for="exampleInputPassword1">  Quantity Rate</label>
-                                <input type="text" class="form-control"   placeholder=" Enter Number of Percentage" name="qty_rate">
-                                <small id="emailHelp" class="form-text text-muted">Enter Percentage Rate </small>
-                             </div>
-                               <input type="submit" class="btn btn-primary" value="Create" >
+                    <label for="exampleInputPassword1">Product Quantity </label>
+                    <input type="text" class="form-control"   placeholder=" Enter Number of Product" name="product_qty">
+                    <small id="emailHelp" class="form-text text-muted">Enter Number of Product Quantity for Promo </small>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">  Quantity Rate</label>
+                  <input type="text" class="form-control"  placeholder=" Enter Number of Percentage" name="qty_rate">
+                  <small id="emailHelp" class="form-text text-muted">Enter Percentage Rate </small>
+                </div>
+                  <input type="submit" class="btn btn-primary" name="quantity_discount" value="Submit" >
+							</form>
 						 </div>
-						 </form>
-					</div>
-              </div>
+					
+			    </div>
+            </div>
         </div>
     </div>
 </div>
@@ -133,7 +165,7 @@
 @section('script')
   <script src="{{ asset('js/dataTables/datatables.min.js')}}"></script>
    <script src="{{ asset('js/dataTables/dataTables.bootstrap4.min.js')}}"></script>  
-    <script>
+<script>
        $(document).ready(function(){
                 $('.table').DataTable({
                     pageLength: 10,
@@ -156,7 +188,7 @@
 
             });
 
-        </script>
+</script>
 
-        @endsection
+@endsection
 
