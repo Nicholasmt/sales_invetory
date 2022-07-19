@@ -56,11 +56,11 @@
                                 <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Phone" name="last_name">
                             </div>
                            
-                    </div>
+                      </div>
 
-                    <div class="col-md-12">
+                       <div class="col-md-12">
 
-                 <input type="submit" class="btn btn-primary" value="Create">
+                       <input type="submit" class="btn btn-primary" value="Create">
 
                     </div>
 

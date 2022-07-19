@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Users;
+use App\Models\Roles;
 class UsersController extends Controller
 {
     /**
@@ -14,8 +15,11 @@ class UsersController extends Controller
     public function index()
     {
         $id = session()->get('id');
-        $users = Users::find("$id");
-        return view('admin.employees.index',compact('$users'));
+        $count = 1;
+        $users = Users::where('role_id',2)->get();
+        
+        $roles = Roles::all();
+        return view('admin.employees.index',compact('users','roles','count'));
     }
 
     /**
@@ -36,7 +40,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

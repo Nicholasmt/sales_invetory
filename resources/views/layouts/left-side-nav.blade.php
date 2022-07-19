@@ -25,7 +25,7 @@
           <a href="{{ route('admincompany.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Company Setup</span></a>
         </li>
         <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">
-          <a href="{{ route('admineusers.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Employees</span></a>
+          <a href="{{ route('adminusers.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Employees</span></a>
         </li>
         <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">
            <a href="{{ route('admincategories.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Categories</span></a>
