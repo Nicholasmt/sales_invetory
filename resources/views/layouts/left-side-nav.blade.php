@@ -19,13 +19,13 @@
             <a href="{{ route('admin-dashboard')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
         </li>
         <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">
-            <a href="{{ route('admin-view-all-sales')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Sales Records</span></a>
+            <a href="{{ route('admin-view-all-sales')}}" class="nav-link "><span class="pcoded-micon"><i class="fa fa-address-book"></i></span><span class="pcoded-mtext">Sales Records</span></a>
         </li>
         <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">
-          <a href="{{ route('admincompany.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Company Setup</span></a>
+          <a href="{{ route('admincompany.index')}}" class="nav-link "><span class="pcoded-micon"><i class="fa fa-briefcase"></i></span><span class="pcoded-mtext">Company</span></a>
         </li>
         <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">
-          <a href="{{ route('adminusers.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Employees</span></a>
+          <a href="{{ route('adminusers.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-users"></i></span><span class="pcoded-mtext">Employees</span></a>
         </li>
         <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">
            <a href="{{ route('admincategories.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Categories</span></a>
@@ -34,7 +34,7 @@
           <a href="{{ route('adminproducts.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Products</span></a>
         </li>
         <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">
-          <a href="{{ route('admindiscounts.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Discounts</span></a>
+          <a href="{{ route('admindiscounts.index')}}" class="nav-link "><span class="pcoded-micon"><i class="fa fa-briefcase"></i></span><span class="pcoded-mtext">Discounts</span></a>
         </li>
 		<li data-username="Table bootstrap datatable footable" class="nav-item">
             <a href="{{ route('admin-logs')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-server"></i></span><span class="pcoded-mtext">Sellers Logs</span></a>

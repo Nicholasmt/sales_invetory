@@ -30,10 +30,7 @@ Route::get('/logout', [App\Http\Controllers\IndexController::class, 'logout'])->
 Route::group(['prefix'=> 'admin', 'as'=>'admin', 'middleware' => 'admin'], function(){
 
     Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('-dashboard');
-    //view employee
-    Route::get('/salers', [App\Http\Controllers\AdminController::class, 'add_new'])->name('-add-new-sellers');
     Route::get('/view', [App\Http\Controllers\AdminController::class, 'view'])->name('-view_all');
-    //view all sales
     Route::get('/view-all-sales', [App\Http\Controllers\AdminController::class, 'view_all_sales'])->name('-view-all-sales');
     Route::resource('products', App\Http\Controllers\ProductController::class);
     Route::resource('categories', App\Http\Controllers\CategoryController::class); 
@@ -42,6 +39,7 @@ Route::group(['prefix'=> 'admin', 'as'=>'admin', 'middleware' => 'admin'], funct
     Route::resource('profile', App\Http\Controllers\AdminController::class);
     Route::resource('users', App\Http\Controllers\UsersController::class);
     Route::get('/system-logs', [App\Http\Controllers\LogsController::class, 'index'])->name('-logs');
+    Route::get('/delete/{user}', [App\Http\Controllers\UsersController::class, 'delete'])->name('-deleteUsers');
        
    });
    

@@ -17,10 +17,10 @@
                 <hr>
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                    <li class="nav-item">
-                       <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"> <i class="fa fa-home"></i> Employee</a>
+                       <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"> <i class="fa fa-users"></i> Employee</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><i class="fa fa-plus"></i> Add</a>
+                      <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><i class="fa fa-user-plus"></i> Add</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
@@ -49,7 +49,8 @@
 								<td>{{$user->email}}</td>
 								<td>{{$user->phone}}</td>
 								<td>{{$user->address}}</td>
-                <td> <a href="" class="btn btn-danger"> <i class="fa fa-trash"></i> </a></td>
+                <td> <a value="{{$user->id}}" id="delete" class="btn btn-danger"> <i class="fa fa-trash"></i> </a></td>
+                <div id="modal"></div>
 							</tr>
 						 @endforeach 
 					   </tbody>
@@ -75,7 +76,8 @@
                    </div>
                    <div class="form-group">
                       <label for="exampleFormControlSelect1">Select Privilege</label>
-                      <select class="form-control" id="exampleFormControlSelect1">
+                      <select class="form-control" name="role">
+                      <option disabled selected>Select Role</option>
                           @foreach ($roles as $role )
                             <option value="{{$role->role_id}}">{{$role->title}}</option>
                           @endforeach
@@ -87,7 +89,7 @@
                    </div>
                    <div class="form-group">
                       <label for="exampleInputPassword1">Phone</label>
-                      <input type="text" class="form-control"  placeholder="Enter Phone" name="last_name">
+                      <input type="text" class="form-control"  placeholder="Enter Phone" name="phone">
                    </div>
 				         <div class="col-md-12">
                     <input type="submit" class="btn btn-primary" value="Submit">
@@ -107,7 +109,7 @@
 </style>  
 @endsection
 @section('script')
-      <script src="{{ asset('js/loader.js')}}"></script>
+      <script src="{{ asset('js/delete.js')}}"></script>
        <script src="{{ asset('js/dataTables/datatables.min.js')}}"></script>
       <script src="{{ asset('js/dataTables/dataTables.bootstrap4.min.js')}}"></script>  
        <script>

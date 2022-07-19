@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Users;
 use App\Models\Roles;
+use App\Mail\User_mails;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 class UsersController extends Controller
 {
     /**
@@ -17,7 +22,6 @@ class UsersController extends Controller
         $id = session()->get('id');
         $count = 1;
         $users = Users::where('role_id',2)->get();
-        
         $roles = Roles::all();
         return view('admin.employees.index',compact('users','roles','count'));
     }
@@ -40,7 +44,36 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $rules =['first_name'=>'required',
+                 'last_name'=>'required',
+                 'email'=>'required',
+                 'phone'=>'required',
+                 'address'=>'required',
+                 'role'=>'required',
+                ];
+       $validator = Validator::make($request->all(),$rules);
+       if($validator->fails())
+       {
+        return back()->withErrors($validator->errors());
+       }
+       else
+       {
+          $randomPass = Str::random(8);
+           $user=['first_name'=>$request->first_name,
+                    'last_name'=>$request->last_name,
+                    'email'=>$request->email,
+                    'phone'=>$request->phone,
+                    'address'=>$request->address,
+                    'role_id'=>$request->role,
+                    'password'=>Hash::make($randomPass)
+                   ];
+           $employee = Users::create($user);
+           Mail::to($employee->email)->send( new User_mails($employee,$randomPass));
+           return back()->with('success','Employee Created');
+       }
+
+
+
     }
 
     /**
@@ -76,15 +109,28 @@ class UsersController extends Controller
     {
         //
     }
-
+      public function delete(Users $user)
+      {
+        return view('admin.employees.delete',compact('user'))->render();
+      }
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$user_id)
     {
-        //
+        $id = session()->get('id');
+        $user = Users::find("$id");
+        if(Hash::check($request->password,$user->password))
+        {
+           Users::where('id',$user_id)->delete();
+           return back('success','User Deleted Successfully');
+        }
+        else
+        {
+          return back()->with('error','Password Mismatch');
+        }
     }
 }
