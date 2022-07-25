@@ -16,8 +16,8 @@ class CompanyController extends Controller
     public function index()
     {
         $count =1;
-        $company = Company_setup::all();
-        return view('admin.company.index', compact('company','count'));
+        $companys = Company_setup::all();
+        return view('admin.company.index', compact('companys','count'));
 
     }
 
@@ -85,9 +85,9 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Company_setup $company)
     {
-        //
+        return view('admin.company.edit',compact('company'));
     }
 
     /**
@@ -97,9 +97,15 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $company)
     {
-        //
+        Company_setup::where('id',$company)->update(['name'=>$request->name,
+                                                      'location'=>$request->location,
+                                                      'contact'=>$request->contact,
+                                                      'registration_number'=>$request->registration_number
+                                                    ]);
+
+        return back()->with('success','Updated successfuly');
     }
 
     /**

@@ -41,7 +41,7 @@
                                      </tr>
                                 </thead>
                                <tbody>
-                                    @if($company->count() == 0 )
+                                    @if($companys->count() == 0 )
                                         <td scope="row"><label class="btn btn-info"> No data Found</label></td>
                                     @else
                                     @foreach ($companys as $company)

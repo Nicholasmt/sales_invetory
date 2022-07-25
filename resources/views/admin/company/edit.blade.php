@@ -11,7 +11,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-md-6">
-                      <form action="{{ route('admincompany.update',['company'=>$product])}}" method="POST">
+                      <form action="{{ route('admincompany.update',['company'=>$company])}}" method="POST">
                             @csrf
                             @method('PATCH')
                             <div class="form-group">
