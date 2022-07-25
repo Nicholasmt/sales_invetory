@@ -41,6 +41,8 @@ Route::group(['prefix'=> 'admin', 'as'=>'admin', 'middleware' => 'admin'], funct
     Route::resource('logs', App\Http\Controllers\LogsController::class);
     Route::get('/delete/{user}', [App\Http\Controllers\UsersController::class, 'delete'])->name('-deleteUsers');
     Route::get('/deletecategory/{category}', [App\Http\Controllers\CategoryController::class, 'delete'])->name('-deleteCategory');
+    Route::get('/delete/{discount}', [App\Http\Controllers\DiscountController::class, 'delete'])->name('-deleteDiscount');
+    Route::get('/delete/{product}', [App\Http\Controllers\ProductController::class, 'delete'])->name('-deleteProduct');
     Route::get('/deletecompany/{company}', [App\Http\Controllers\CompanyController::class, 'delete'])->name('-deleteCompany');
  });
    

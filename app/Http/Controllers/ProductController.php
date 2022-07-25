@@ -105,14 +105,29 @@ class ProductController extends Controller
        
     }
 
+    public function delete(Products $product)
+    {
+      return view('admin.products.delete',compact('product'))->render();
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Request $request,$product)
+    { 
+         $id =session()->get('id');
+        $user = Users::find("$user");
+       if(\Hash::check($request->password,$user->passsword))
+       {
+          Products::where('id',$product)->delete();
+          return back('success','Deleted Successfully');
+       }
+       else
+       {
+        return back('error','Incorrect Password');
+       }
     }
 }

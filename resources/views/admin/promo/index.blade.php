@@ -87,14 +87,13 @@
                                             </td>
                                             <td>{{$discount->created_at->diffForHumans()}}</td>
                                         <td>
-                                        
-                                        <a href="{{ route('admindiscounts.edit',['discount'=>$discount])}}" class="btn btn-primary"> <i class="fa fa-edit"></i></a>
+                                         <a href="{{ route('admindiscounts.edit',['discount'=>$discount])}}" class="btn btn-primary"> <i class="fa fa-edit"></i></a>
                                          <span>
-                                           <a href="" class="btn btn-danger"> <i class="fa fa-trash"></i></a>  
+                                           <a id="deletediscount" value="{{discount->id}}" class="btn btn-danger"> <i class="fa fa-trash text-white"></i></a>  
                                          </span>
                                        </td>
                                     </tr>
-                                @endforeach 
+                                  @endforeach 
                                 @endif
                             </tbody>
                         </table>

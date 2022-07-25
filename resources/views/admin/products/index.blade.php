@@ -37,8 +37,8 @@
                             <th>Total Price</th>
                             <th>Category</th>
                             <th>Date</th>
-                            <th>Action</th>
-                            <th>Action</th>
+                            <th>Actions</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -54,8 +54,10 @@
                             <td>{{$product->total_value}}</td>
                             <td>{{$product->category->title}}</td>
                             <td>{{$product->created_at->diffForHumans()}}</td>
-                            <td><a href="{{ route('adminproducts.edit',['product'=>$product])}}" class="btn btn-primary"> <i class="fa fa-edit"></i> </a></td>
-                            <td><a href="" class="btn btn-danger"> <i class="fa fa-trash"></i></a></td>
+                            <td>
+                              <a href="{{ route('adminproducts.edit',['product'=>$product])}}" class="btn btn-primary"> <i class="fa fa-edit"></i> </a>
+                              <span><a id="deleteproduct" value="{{$product->id}}" class="btn btn-danger"> <i class="fa fa-trash text-white"></i></a></span>
+                            </td>
                          </tr>
                          @endforeach 
                       @endif
@@ -70,9 +72,8 @@
                             <th>Total Price</th>
                             <th>Category</th>
                             <th>Date</th>
-                            <th>Action</th>
-                            <th>Action</th>
-                        </tr>
+                            <th>Actions</th>
+                         </tr>
                     </thead>  
                 </tfoot>
             </table>
