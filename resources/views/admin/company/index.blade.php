@@ -55,7 +55,7 @@
                                         <td>
                                             <a href="{{ route('admincompany.edit',['company'=>$company])}}" class="btn btn-primary"> <i class="fa fa-edit"></i></a>
                                              <span>
-                                               <a id="delete" value="{{$company->id}}" class="btn btn-danger text-white"> <i class="fa fa-trash"></i></a>
+                                               <a id="deletecompany" value="{{$company->id}}" class="btn btn-danger text-white"> <i class="fa fa-trash"></i></a>
                                              </span>
                                             <div id="modal"></div>
                                         </td>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Categories;
+use App\Models\Users;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -79,9 +80,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit( Categories $category)
     {
-        //
+        return view('admin.categories.edit',compact('category'));
     }
 
     /**
@@ -91,19 +92,35 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $category)
     {
-        //
+           Categories::where('id',$category)->update(['title'=>$request->title,
+                                                      'description'=>$request->description
+                                                     ]);
+           return back()->with('success','Updated successfully');
     }
-
+    public function delete(Categories $category)
+    {
+        return view('admin.categories.delete',compact('category'));
+    }
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Categories $request,$category)
     {
-        //
+        $id =session()->get('id');
+        $user = Users::find("$user");
+       if(\Hash::check($request->password,$user->passsword))
+       {
+          Categories::where('id',$category)->delete();
+          return back('success','Deleted Successfully');
+       }
+       else
+       {
+        return back('error','Incorrect Password');
+       }
     }
 }

@@ -49,9 +49,12 @@
                             <td>{{$category->description}}</td>
                             <td>{{$category->created_at->diffForHumans()}}</td>
                             <td>
-                               <a href="" class="btn btn-primary"> <i class="fa fa-edit"></i></a>
-                               <span><a href="" class="btn btn-danger"> <i class="fa fa-trash"></i></a></span>
-                            </td>
+                               <a href="{{ route('admincategories.edit',['category'=>$category])}}" class="btn btn-primary"> <i class="fa fa-edit"></i></a>
+                               <span>
+                                 <a id="deletecategory" value="{{$category->id}}" class="btn btn-danger"> <i class="fa fa-trash text-white"></i></a>
+                              </span>
+                              <div id="modal"></div>
+                              </td>
                          </tr>
                         @endforeach 
                         @endif
@@ -97,7 +100,7 @@
   
 @endsection
 @section('script')
-<script src="{{ asset('js/loader.js')}}"></script>
+<script src="{{ asset('js/delete.js')}}"></script>
 <script src="{{ asset('js/dataTables/datatables.min.js')}}"></script>
 <script src="{{ asset('js/dataTables/dataTables.bootstrap4.min.js')}}"></script>  
 <script>
