@@ -89,13 +89,30 @@
                                         <td>
                                          <a href="{{ route('admindiscounts.edit',['discount'=>$discount])}}" class="btn btn-primary"> <i class="fa fa-edit"></i></a>
                                          <span>
-                                           <a id="deletediscount" value="{{discount->id}}" class="btn btn-danger"> <i class="fa fa-trash text-white"></i></a>  
+                                           <a id="deletediscount" value="{{$discount->id}}" class="btn btn-danger"> <i class="fa fa-trash text-white"></i></a>  
                                          </span>
+                                         <div id="modal"></div>
                                        </td>
                                     </tr>
                                   @endforeach 
                                 @endif
                             </tbody>
+                            <tfoot>
+                            <thead>
+                                 <tr>
+                                     <th>S/N</th>
+                                     <th>Product Name</th>
+                                     <th>Product Normal Price</th>
+                                     <th>Rate (per product)</th>
+                                     <th>Discount Price</th>
+                                     <th>Quantity of Products</th>
+                                     <th>Quantity Rate</th>
+                                     <th>Quantity Discount Price</th>
+                                     <th>Date/Time</th>
+                                     <th>Actions</th>
+                                  </tr>
+                              </thead>
+                            </tfoot>
                         </table>
                      </div>
 			          </div>
@@ -162,6 +179,7 @@
 </style>  
 @endsection
 @section('script')
+<script src="{{ asset('js/delete.js')}}"></script>
   <script src="{{ asset('js/dataTables/datatables.min.js')}}"></script>
    <script src="{{ asset('js/dataTables/dataTables.bootstrap4.min.js')}}"></script>  
 <script>

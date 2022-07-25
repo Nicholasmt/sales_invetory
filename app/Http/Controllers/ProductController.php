@@ -100,9 +100,16 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $product)
     { 
-       
+        $value=$request->qty + $request->price;
+       Products::where('id',$product)->update(['product_name'=>$request->product_name,
+                                               'price'=>$request->price,
+                                               'qty'=>$request->qty,
+                                               'cat_id'=>$request->category,
+                                               'total_value'=>$value,
+                                                ]);
+         return back()->with('success','Updated Successfully');
     }
 
     public function delete(Products $product)

@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div class="modal-header modal-bg">
                     <button type="button" class="close-tab" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h3 class="modal-title ">Delete <span class="text-capitalize">{{$category->product_name}} Product Discount</span> </h3>
+                    <h3 class="modal-title ">Delete <span class="text-capitalize">{{$discount->product_name}} Product Discount</span> </h3>
                      <h3 class="font-bold"></h3>
                  </div>
                  <form action="{{ route('admindiscounts.destroy',['discount'=>$discount])}}" method="POST">
