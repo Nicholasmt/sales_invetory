@@ -40,6 +40,7 @@ Route::group(['prefix'=> 'admin', 'as'=>'admin', 'middleware' => 'admin'], funct
     Route::resource('users', App\Http\Controllers\UsersController::class);
     Route::resource('logs', App\Http\Controllers\LogsController::class);
     Route::get('/delete/{user}', [App\Http\Controllers\UsersController::class, 'delete'])->name('-deleteUsers');
+    Route::get('/deletecompany/{company}', [App\Http\Controllers\CompanyController::class, 'delete'])->name('-deleteCompany');
  });
    
 Route::group(['prefix' => 'saler', 'as' => 'saler', 'middleware' => 'saler'], function(){

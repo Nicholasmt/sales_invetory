@@ -54,7 +54,10 @@
                                         <td>{{$company->created_at->diffForHumans()}}</td>
                                         <td>
                                             <a href="{{ route('admincompany.edit',['company'=>$company])}}" class="btn btn-primary"> <i class="fa fa-edit"></i></a>
-                                            <span><a href="" class="btn btn-danger"> <i class="fa fa-trash"></i></a></span>
+                                             <span>
+                                               <a id="delete" value="{{$company->id}}" class="btn btn-danger text-white"> <i class="fa fa-trash"></i></a>
+                                             </span>
+                                            <div id="modal"></div>
                                         </td>
                                       </tr>
                                   @endforeach 
@@ -111,7 +114,7 @@
 </style>  
 @endsection
 @section('script')
-      <script src="{{ asset('js/loader.js')}}"></script>
+      <script src="{{ asset('js/delete.js')}}"></script>
        <script src="{{ asset('js/dataTables/datatables.min.js')}}"></script>
       <script src="{{ asset('js/dataTables/dataTables.bootstrap4.min.js')}}"></script>  
        <script>

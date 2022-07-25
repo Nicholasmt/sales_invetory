@@ -49,8 +49,8 @@
 								<td>{{$user->email}}</td>
 								<td>{{$user->phone}}</td>
 								<td>{{$user->address}}</td>
-                <td> <a value="{{$user->id}}" id="delete" class="btn btn-danger"> <i class="text-white fa fa-trash"></i> </a></td>
-                <div id="modal"></div>
+                        <td> <a value="{{$user->id}}" id="delete" class="btn btn-danger"> <i class="text-white fa fa-trash"></i> </a></td>
+                       <div id="modal"></div>
 							</tr>
 						 @endforeach 
 					   </tbody>

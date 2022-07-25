@@ -54,9 +54,7 @@ class IndexController extends Controller
                  'password' => 'required'
                 ];
 
-        $message=[''];
-
-        $validuate = Validator::make($request->all(), $rules, $message);
+        $validuate = Validator::make($request->all(), $rules);
 
         if($validuate->fails())
         {
@@ -64,11 +62,10 @@ class IndexController extends Controller
         }
 
         else
-        {
-          
+        {  
             $email = $request->email;
             $password = $request->password;
-          $user = Users::where('email',$email)->with('role')->first();
+            $user = Users::where('email',$email)->with('role')->first();
 
           if($user)
           {
@@ -83,20 +80,15 @@ class IndexController extends Controller
 
                   return redirect('redirect');
               }
-
-              else
+               else
               {
-                  return redirect('sign-in')->with('error', 'Email and Password Mismatch!');
-                         
+                  return redirect('sign-in')->with('error', 'Incorrect Email and Password');
               }
 
           }
-
-          else
+           else
           {
-
-            return redirect('sign-in')->with('error', 'User Does Not Exist!');
-
+             return redirect('sign-in')->with('error', 'User Does Not Exist!');
           }
 
         }

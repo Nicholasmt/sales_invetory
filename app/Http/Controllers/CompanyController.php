@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Company_setup;
+use App\Models\Users;
 use Illuminate\Support\Facades\Validator;
 
 class CompanyController extends Controller
@@ -108,14 +109,30 @@ class CompanyController extends Controller
         return back()->with('success','Updated successfuly');
     }
 
+    public function delete(Company_setup $company)
+    {
+      return view('admin.company.delete',compact('company'));
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$company)
     {
-        //
+        $id=session()->get('id');
+        $user=Users::find("$id");
+        if(\Hash::check($request->password,$user->password))
+        {
+            Company_setup::where('id',$company)->delete();
+
+            return back()->with('success','Deleted successfuly');
+        }
+        else
+        {
+            return back()->with('error','Incorrect Password');
+        }
     }
 }
