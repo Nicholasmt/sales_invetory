@@ -44,16 +44,16 @@
                                     @if($company->count() == 0 )
                                         <td scope="row"><label class="btn btn-info"> No data Found</label></td>
                                     @else
-                                    @foreach ($company as $c)
+                                    @foreach ($companys as $company)
                                     <tr>
                                         <td scope="row">{!!$count++;!!}</td>
-                                        <td>{{$c->name}}</td>
-                                        <td>{{$c->location}}</td>
-                                        <td>{{$c->contact}}</td>
-                                        <td>{{$c->registration_number}}</td>
-                                        <td>{{$c->created_at->diffForHumans()}}</td>
+                                        <td>{{$company->name}}</td>
+                                        <td>{{$company->location}}</td>
+                                        <td>{{$company->contact}}</td>
+                                        <td>{{$company->registration_number}}</td>
+                                        <td>{{$company->created_at->diffForHumans()}}</td>
                                         <td>
-                                            <a href="" class="btn btn-primary"> <i class="fa fa-edit"></i></a>
+                                            <a href="{{ route('admincompany.edit',['company'=>$company])}}" class="btn btn-primary"> <i class="fa fa-edit"></i></a>
                                             <span><a href="" class="btn btn-danger"> <i class="fa fa-trash"></i></a></span>
                                         </td>
                                       </tr>

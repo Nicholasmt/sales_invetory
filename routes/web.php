@@ -33,19 +33,16 @@ Route::group(['prefix'=> 'admin', 'as'=>'admin', 'middleware' => 'admin'], funct
     Route::get('/view', [App\Http\Controllers\AdminController::class, 'view'])->name('-view_all');
     Route::get('/view-all-sales', [App\Http\Controllers\AdminController::class, 'view_all_sales'])->name('-view-all-sales');
     Route::resource('products', App\Http\Controllers\ProductController::class);
-    Route::resource('categories', App\Http\Controllers\CategoryController::class); 
+    Route::resource('categories', App\Http\Controllers\CategoryController::class);
     Route::resource('discounts', App\Http\Controllers\DiscountController::class);
     Route::resource('company', App\Http\Controllers\CompanyController::class);
     Route::resource('profile', App\Http\Controllers\AdminController::class);
     Route::resource('users', App\Http\Controllers\UsersController::class);
-    Route::get('/system-logs', [App\Http\Controllers\LogsController::class, 'index'])->name('-logs');
+    Route::resource('logs', App\Http\Controllers\LogsController::class);
     Route::get('/delete/{user}', [App\Http\Controllers\UsersController::class, 'delete'])->name('-deleteUsers');
-       
-   });
+ });
    
 Route::group(['prefix' => 'saler', 'as' => 'saler', 'middleware' => 'saler'], function(){
-
-
     Route::get('/dashboard', [App\Http\Controllers\SalersController::class, 'index'])->name('-dashbaord');
     // product overview
     Route::get('/overview', [App\Http\Controllers\SalersController::class, 'create'])->name('-overview');

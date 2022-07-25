@@ -12,7 +12,7 @@
            <li class="nav-item">
               <a class="nav-link active text-uppercase" id="home-tab" data-toggle="tab" href="{{ route('admin-dashboard')}}" role="tab" aria-controls="home" aria-selected="true">Dashboard</a>
            </li>
-			 <div class="col-sm-12">
+			    <div class="col-sm-12">
                <h5 class="mt-4">Setup Employee</h5>
                 <hr>
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -49,7 +49,7 @@
 								<td>{{$user->email}}</td>
 								<td>{{$user->phone}}</td>
 								<td>{{$user->address}}</td>
-                <td> <a value="{{$user->id}}" id="delete" class="btn btn-danger"> <i class="fa fa-trash"></i> </a></td>
+                <td> <a value="{{$user->id}}" id="delete" class="btn btn-danger"> <i class="text-white fa fa-trash"></i> </a></td>
                 <div id="modal"></div>
 							</tr>
 						 @endforeach 
@@ -100,7 +100,6 @@
         </div>
     </div>
 </div>
-	 
 <style>
      select.form-control.form-control-sm
     {

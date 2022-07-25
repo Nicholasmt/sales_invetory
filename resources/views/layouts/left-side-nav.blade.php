@@ -37,7 +37,7 @@
           <a href="{{ route('admindiscounts.index')}}" class="nav-link "><span class="pcoded-micon"><i class="fa fa-briefcase"></i></span><span class="pcoded-mtext">Discounts</span></a>
         </li>
 		<li data-username="Table bootstrap datatable footable" class="nav-item">
-            <a href="{{ route('admin-logs')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-server"></i></span><span class="pcoded-mtext">Sellers Logs</span></a>
+            <a href="{{ route('adminlogs.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-server"></i></span><span class="pcoded-mtext">Sellers Logs</span></a>
         </li>
   @else
         <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item active">
