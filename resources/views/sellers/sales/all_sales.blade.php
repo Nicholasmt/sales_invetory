@@ -11,9 +11,9 @@
         </div>
        
         <div class="card-block table-border-style">
-            <form action="" class="">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Enter Invocice Number" id="keyword">
+        <form action="" class="">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Enter Invocice Number" id="keyword">
             <div class="input-group-append">
                 <a class="btn btn-primary" id="Search">Search</a>
             </div>

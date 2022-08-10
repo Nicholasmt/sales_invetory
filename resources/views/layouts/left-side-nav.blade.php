@@ -49,7 +49,7 @@
         </li>
 
         <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">
-            <a href="{{ route('saler-saleP')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Sale Product</span></a>
+            <a href="{{ route('salercreatesales.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Sale</span></a>
         </li>
 
         <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">

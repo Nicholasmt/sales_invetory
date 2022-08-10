@@ -72,16 +72,7 @@ class SalersController extends Controller
     public function create_sales()
     {   
         
-        $count = 1;
-        $id = session()->get('id');
-        $sellers = Users::find("$id");
-       $sales = Sales_invocie::where('user_id',$sellers->id)->get();
-
-        $cat = Categories::all();
-        $product = Products::all();
-        $discount = Discounts::all();
-
-         return view('sellers.sales.create_sale', compact('sales','count', 'cat', 'product', 'discount'));
+       
     }
 
     public function all_sales()
@@ -107,27 +98,7 @@ class SalersController extends Controller
 
 
 
-      public function loader($id)
-      {
-  
-          $discount = Discounts::where('product_id', $id)->first();
-
-          
-
-         if($discount == null)
-         {
-            return view('sellers.sales.no-discount')->with('error', 'No discount for this Product');
-           
-         }
-         else
-         {
-            return view('sellers.sales.load-discount', compact('discount'))->render();
-           
-         }
-
        
-
-      }
 
       public function sales_invoice($id)
       {
@@ -157,13 +128,15 @@ class SalersController extends Controller
     public function store(Request $request , Sales_invocie $sales_invocie, Products $product)
     {
         $rules=['category' => 'required',
-                  'product'=> 'required',
-                   'qty' => 'required',
-                   'customer_name'=>'required',
-                    'customer_phone' => 'required'];
+                'product'=> 'required',
+                'qty' => 'required',
+                'customer_name'=>'required',
+                'customer_phone' => 'required'
+                ];
+
          $messages=[ 'category.required' => 'Select a Category',
                      'product.required' => 'Select a Product'
-                    ];
+                  ];
         $validate = Validator::make($request->all(), $rules, $messages);
           if($validate->fails())
                 {
