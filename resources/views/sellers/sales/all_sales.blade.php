@@ -15,7 +15,7 @@
             <div class="input-group">
               <input type="text" class="form-control" placeholder="Enter Invocice Number" id="keyword">
             <div class="input-group-append">
-                <a class="btn btn-primary" id="Search">Search</a>
+                <a class="btn btn-primary text-white" id="Search">Search</a>
             </div>
 		</div>
 			</form>

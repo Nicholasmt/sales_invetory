@@ -38,7 +38,7 @@ class SalesInvoiceController extends Controller
     public function load_discount($id)
     {
         $discount = Discounts::where('product_id', $id)->first();
-           if($discount == null)
+         if($discount == null)
          {
             return view('sellers.sales.no-discount')->with('error', 'No discount for this Product');
          }
@@ -54,6 +54,28 @@ class SalesInvoiceController extends Controller
         $customer = Customer::where('phone', 'like', "%{$id}%")->first();
         return view('sellers.sales.load-customer',compact('customer'))->render();
     }
+
+    public function all_sales()
+    {
+            $count = 1;
+            $id = session()->get('id');
+            $sellers = Users::find("$id");
+           $sales = Sales_invocie::where('user_id',$sellers->id)->get();
+
+
+         return view('sellers.sales.all_sales', compact('sales','count'));
+    }
+
+    public function searchResult($keyword)
+    {
+            $count = 1;
+            $id = session()->get('id');
+            $sellers = Users::find("$id");
+            $sales = Sales_invocie::where('user_id', $sellers->id)->where('invoice_no', 'like', "%{$keyword}%")->get();
+
+         return view('sellers.sales.load-sales-result', compact('sales','count'))->render();
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -73,7 +95,8 @@ class SalesInvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+   
+
     }
 
     /**

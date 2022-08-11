@@ -11,6 +11,9 @@
              <li class="nav-item">
                <a class="nav-link active text-uppercase" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sales</a>
              </li>
+             <li class="" style="margin-left:60%">
+               <a class=" btn btn-primary text-uppercase"  href="{{ route('salercheckouts.index')}}"><i class="fa fa-file"></i></a>
+             </li>
              <div class="col-sm-12">
              <h5 class="mt-4">View / Create Sale</h5>
              <hr>
@@ -74,14 +77,14 @@
                                      </tr>
                                       @endforeach 
                                      @endif
-                                 </tbody>
-                            </table>
-                        </div>
-					</div>
-                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                </tbody>
+                          </table>
+                     </div>
+				  </div>
+                  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                     <div class="row">
                       <div class="col-md-12">
-                         <form method="POST" action="{{ route('saler-save-sales')}}">
+                         <form method="POST" action="{{ route('salercheckouts.store')}}">
                             @csrf
                               <div class="form-group">
                                 <label for="exampleFormControlSelect1">Select Category</label>
@@ -91,11 +94,10 @@
                                   <option value="{{$c->id}}" id="{{$c->id}}">{{$c->title}}</option>
                                     @endforeach
                                  </select>
-                                </div>
-                                 <div id="product"></div>
-                                 
-                                 <div id="discount"></div>
-                                 <div class="form-group">
+                               </div>
+                               <div id="product"></div>
+                               <div id="discount"></div>
+                               <div class="form-group">
                                     <label for="exampleInputEmail1"> Quantity of product</label>
                                     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Title" name="qty">
                                 
@@ -114,13 +116,13 @@
                                      <input type="submit" class="btn btn-info" value="Add to chart" >
                                    </div>
                               </form>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-	</div>
+                           </div>
+                       </div>
+                   </div>
+              </div>
+         </div>
+    </div>
+</div>
 <style>
  select.form-control.form-control-sm
 {

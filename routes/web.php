@@ -54,15 +54,17 @@ Route::group(['prefix' => 'saler', 'as' => 'saler', 'middleware' => 'saler'], fu
     Route::get('/view-product/{id}', [App\Http\Controllers\SalersController::class, 'view_product'])->name('-viewP');
     //sales
     Route::get('/make-sale', [App\Http\Controllers\SalersController::class, 'create_sales'])->name('-saleP');
-    Route::get('/all-sales', [App\Http\Controllers\SalersController::class, 'all_sales'])->name('-all-sales');
-    Route::get('/search-result/{keyword}', [App\Http\Controllers\SalersController::class, 'searchResult'])->name('-results'); 
+    Route::get('/all-sales', [App\Http\Controllers\SalesInvoiceController::class, 'all_sales'])->name('-all-sales');
+    Route::get('/search-result/{keyword}', [App\Http\Controllers\SalesInvoiceController::class, 'searchResult'])->name('-results'); 
     Route::get('/load-discount/{id}', [App\Http\Controllers\SalesInvoiceController::class, 'load_discount'])->name('-load-discount');
     Route::get('/load-product/{id}', [App\Http\Controllers\SalesInvoiceController::class, 'load_product'])->name('-load-product');
     Route::get('/load-customer/{id}', [App\Http\Controllers\SalesInvoiceController::class, 'load_customer'])->name('-load-customer');
-    Route::post('/save_sale', [App\Http\Controllers\SalersController::class, 'store'])->name('-save-sales');
+    Route::post('/sale', [App\Http\Controllers\SalersController::class, 'store'])->name('-save-sales');
     Route::get('/sale-invoice/{id}', [App\Http\Controllers\SalersController::class, 'sales_invoice'])->name('-sales-invoice');
     Route::get('/invoice-print/{id}', [App\Http\Controllers\SalersController::class, 'invoice_print'])->name('-printInvoice');
     Route::get('/notifaction', [App\Http\Controllers\NoticationsController::class, 'index'])->name('-notifaction');
     Route::resource('profile', App\Http\Controllers\AdminController::class);
+    Route::resource('checkouts', App\Http\Controllers\CheckoutController::class);
+    
  
 });
