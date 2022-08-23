@@ -66,7 +66,7 @@ class SalersController extends Controller
 
         $products = Products::where('cat_id', $id)->get();
 
-        return view('sellers.products.view-product', compact('products'));
+        return view('sellers.products.product-overview', compact('products'));
 
     }
 

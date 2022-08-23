@@ -6,8 +6,8 @@
      <div class="card-header">
         <h5 class="mb-3">Overviews</h5>/
            <span class=""> 
-            <a href="{{ route('saler-dashbaord')}}" class="">Dashboard</a>/ 
-            <a href="{{ route('saler-dashbaord')}}" class="">Product Categories</a>
+            <a href="{{ route('saler-dashbaord')}}" class="btn btn-white">Dashboard</a>/ 
+            <a href="{{ route('saler-dashbaord')}}" class="btn btn-white">Product Categories</a>
            </span>
         </div>
         <div class="accordion" id="accordionExample">
@@ -15,30 +15,43 @@
                <table class="table">
                 <h3>PRODUCT OVERVIEW</h3>
                  <thead>
-                   <tr>
+                   <tr class="text-center">
                     <th>S/N</th>
-                    <th>TITLE</th>
-                    <th>DESCRIPTION</th>
-                    <th>ACTION</th>
+                    <th>PRODUCT NAME</th>
+                    <th>PRICE</th>
+                    <th>AVAILABLE QUNATITY</th>
+                    <th>TOTAL VALUE</th>
                    </tr>
                  </thead>
                  <tbody>
                  @php $count = 1 @endphp
-                 @foreach ($categories as $category)
-                    <tr>
-                        <td>{{$count++}}</td>
-                        <td>{{$category->title}}</td>
-                        <td>{{$category->description}}</td>
-                        <td><a href="{{ route('saler-viewP',$category->id)}}" class="btn btn-primary"> <i class="fa fa-eye"></i> </a></td>
-                    </tr>
-                    @endforeach
+                 @if ($products->count() == 0)
+                  <td class="badge badge-warning"> NO PRODUCT FOUND</td>
+                  @else
+                   @foreach ($products as $product)
+                    <tr class="text-center">
+                       <td>{{$count++}}</td>
+                        <td>{{$product->product_name}}</td>
+                        <td>#{{$product->price}}</td>
+                        <td class="font-bold">
+                            @if ($product->qty == 0)
+                            <p class="badge badge-info">OUT OF STOCK</p></td>
+                            @else
+                            <p class="badge badge-info">{{$product->qty}}</p></td> 
+                            @endif 
+                        <td>{{$product->total_value}}</td>
+                       </tr>
+                      @endforeach
+                    @endif
                  </tbody>
                  <tfoot>
                    <thead>
-                     <tr>
-                        <th>TITLE</th>
-                        <th>DESCRIPTION</th>
-                        <th>ACTION</th>
+                     <tr class="text-center">
+                     <th>S/N</th>
+                    <th>PRODUCT NAME</th>
+                    <th>PRICE</th>
+                    <th>AVAILABLE QUNATITY</th>
+                    <th>TOTAL VALUE</th>
                      </tr>
                    </thead>
                  </tfoot>
