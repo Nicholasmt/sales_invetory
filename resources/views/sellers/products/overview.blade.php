@@ -34,9 +34,10 @@
                  <tfoot>
                    <thead>
                      <tr>
-                        <th>TITLE</th>
-                        <th>DESCRIPTION</th>
-                        <th>ACTION</th>
+                     <th>S/N</th>
+                    <th>TITLE</th>
+                    <th>DESCRIPTION</th>
+                    <th>ACTION</th>
                      </tr>
                    </thead>
                  </tfoot>

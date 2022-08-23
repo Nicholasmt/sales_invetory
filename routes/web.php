@@ -51,6 +51,7 @@ Route::group(['prefix' => 'saler', 'as' => 'saler', 'middleware' => 'saler'], fu
     Route::resource('createsales', App\Http\Controllers\SalesInvoiceController::class);
     Route::resource('profile', App\Http\Controllers\AdminController::class);
     Route::resource('checkouts', App\Http\Controllers\CheckoutController::class);
+    Route::resource('notifications', App\Http\Controllers\NoticationsController::class);
      //product overview
     Route::get('/overview', [App\Http\Controllers\SalersController::class, 'product_overview'])->name('-overview');
     Route::get('/product-overview/{id}', [App\Http\Controllers\SalersController::class, 'overview'])->name('-product-overiew');
@@ -63,7 +64,6 @@ Route::group(['prefix' => 'saler', 'as' => 'saler', 'middleware' => 'saler'], fu
     Route::post('/sale', [App\Http\Controllers\SalersController::class, 'store'])->name('-save-sales');
     Route::get('/sale-invoice/{id}', [App\Http\Controllers\SalersController::class, 'sales_invoice'])->name('-sales-invoice');
     Route::get('/invoice-print/{id}', [App\Http\Controllers\SalersController::class, 'invoice_print'])->name('-printInvoice');
-    Route::get('/notifaction', [App\Http\Controllers\NoticationsController::class, 'index'])->name('-notifaction');
     Route::post('/checkout-selected', [App\Http\Controllers\SalesInvoiceController::class, 'checkout_sales'])->name('-checkout-selected');
     Route::post('/checkout-sales', [App\Http\Controllers\SalesInvoiceController::class, 'sales_receipt'])->name('-checkout-sales');
     Route::get('/view-receipt/{id}', [App\Http\Controllers\SalesInvoiceController::class, 'view_receipt'])->name('-view-receipt');

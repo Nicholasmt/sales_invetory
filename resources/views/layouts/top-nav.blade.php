@@ -15,9 +15,9 @@
       <li><a href="javascript:" class="full-screen" onclick="javascript:toggleFullScreen()"><i class="feather icon-maximize"></i></a></li>
        <li class="nav-item dropdown"><a class="dropdown-toggle" href="javascript:" data-toggle="dropdown">Dropdown</a>
          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="javascript:">Action</a></li>
+            <!-- <li><a class="dropdown-item" href="javascript:">Action</a></li>
             <li><a class="dropdown-item" href="javascript:">Another action</a></li>
-            <li><a class="dropdown-item" href="javascript:">Something else here</a></li>
+            <li><a class="dropdown-item" href="javascript:">Something else here</a></li> -->
          </ul>
        </li>
         <li class="nav-item">
@@ -83,9 +83,15 @@
                   </a>
               </div>
               <ul class="pro-body">
+              @if (Session::get('user_auth') == true && Session::get('privilege') == 1)
                 <li><a href="{{ route('adminprofile.edit',['profile'=>session()->get('id') ])}}" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
                 <li><a href="{{ route('adminprofile.show',['profile'=>session()->get('id') ])}}" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
                 <li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
+              @elseif (Session::get('user_auth') == true && Session::get('privilege') == 2)
+                <li><a href="{{ route('salerprofile.edit',['profile'=>session()->get('id') ])}}" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
+                <li><a href="{{ route('salerprofile.show',['profile'=>session()->get('id') ])}}" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
+                <li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
+               @endif
                 <li><a href="{{ route('logout')}}" class="dropdown-item"><i class="feather icon-lock"></i> Log out</a></li>
               </ul>
             </div>
