@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Products;
 use App\Models\Categories;
-use App\Models\Sales_invocie;
+use App\Models\Sales_invoice;
 use App\Models\Users;
 use App\Models\Discounts;
 use App\Models\Company_setup;
@@ -25,9 +25,9 @@ class SalersController extends Controller
     public function index()
     {
       $id = session()->get('id');
-      $daily_sales = Sales_invocie::where('user_id', $id)->whereDate('created_at', date("Y:m:d"))->get();
-      $monthly_sales = Sales_invocie::where('user_id', $id)->whereMonth('created_at', date('m'))->get();
-      $yearly_sales = Sales_invocie::where('user_id', $id)->whereYear('created_at', Carbon::now()->year)->get();
+      $daily_sales = Sales_invoice::where('user_id', $id)->whereDate('created_at', date("Y:m:d"))->get();
+      $monthly_sales = Sales_invoice::where('user_id', $id)->whereMonth('created_at', date('m'))->get();
+      $yearly_sales = Sales_invoice::where('user_id', $id)->whereYear('created_at', Carbon::now()->year)->get();
 
       $totalDaily = $daily_sales->sum('amount');
       $totalMonthly = $monthly_sales->sum('amount');
@@ -52,19 +52,21 @@ class SalersController extends Controller
      */
     public function create()
     {
-      
-         $category = Categories::all();
          
-
-        return view('sellers.products.overview',compact('category' ));  
+    }
+    
+    public function product_overview()
+    {
+        $categories = Categories::all();
+        return view('sellers.products.overview',compact('categories')); 
     }
 
-    public function view_product($id)
+    public function overview($id)
     {
 
-        $product = Products::where('cat_id', $id)->get();
+        $products = Products::where('cat_id', $id)->get();
 
-        return view('sellers.products.view-product', compact('product'));
+        return view('sellers.products.view-product', compact('products'));
 
     }
 
@@ -74,7 +76,7 @@ class SalersController extends Controller
       {
 
            $company = Company_setup::all();
-           $invoice = Sales_invocie::find("$id");
+           $invoice = Sales_invoice::find("$id");
 
            return view('sellers.invoice.invoice', compact('invoice', 'company'));
       }
@@ -83,7 +85,7 @@ class SalersController extends Controller
       {
 
         $company = Company_setup::all();
-        $invoice = Sales_invocie::find("$id");
+        $invoice = Sales_invoice::find("$id");
 
          return view('sellers.invoice.print-invoice', compact('invoice', 'company'));
       }
@@ -95,7 +97,7 @@ class SalersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request , Sales_invocie $sales_invocie, Products $product)
+    public function store(Request $reques)
     {
       
     } 

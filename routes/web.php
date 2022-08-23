@@ -49,10 +49,11 @@ Route::group(['prefix'=> 'admin', 'as'=>'admin', 'middleware' => 'admin'], funct
 Route::group(['prefix' => 'saler', 'as' => 'saler', 'middleware' => 'saler'], function(){
     Route::get('/dashboard', [App\Http\Controllers\SalersController::class, 'index'])->name('-dashbaord');
     Route::resource('createsales', App\Http\Controllers\SalesInvoiceController::class);
-    //product overview
-    Route::get('/overview', [App\Http\Controllers\SalersController::class, 'create'])->name('-overview');
-    Route::get('/view-product/{id}', [App\Http\Controllers\SalersController::class, 'view_product'])->name('-viewP');
-    //sales
+    Route::resource('profile', App\Http\Controllers\AdminController::class);
+    Route::resource('checkouts', App\Http\Controllers\CheckoutController::class);
+     //product overview
+    Route::get('/overview', [App\Http\Controllers\SalersController::class, 'product_overview'])->name('-overview');
+    Route::get('/product-overview/{id}', [App\Http\Controllers\SalersController::class, 'overview'])->name('-product-overiew');
     Route::get('/make-sale', [App\Http\Controllers\SalersController::class, 'create_sales'])->name('-saleP');
     Route::get('/all-sales', [App\Http\Controllers\SalesInvoiceController::class, 'all_sales'])->name('-all-sales');
     Route::get('/search-result/{keyword}', [App\Http\Controllers\SalesInvoiceController::class, 'searchResult'])->name('-results'); 
@@ -63,8 +64,10 @@ Route::group(['prefix' => 'saler', 'as' => 'saler', 'middleware' => 'saler'], fu
     Route::get('/sale-invoice/{id}', [App\Http\Controllers\SalersController::class, 'sales_invoice'])->name('-sales-invoice');
     Route::get('/invoice-print/{id}', [App\Http\Controllers\SalersController::class, 'invoice_print'])->name('-printInvoice');
     Route::get('/notifaction', [App\Http\Controllers\NoticationsController::class, 'index'])->name('-notifaction');
-    Route::resource('profile', App\Http\Controllers\AdminController::class);
-    Route::resource('checkouts', App\Http\Controllers\CheckoutController::class);
-    
- 
+    Route::post('/checkout-selected', [App\Http\Controllers\SalesInvoiceController::class, 'checkout_sales'])->name('-checkout-selected');
+    Route::post('/checkout-sales', [App\Http\Controllers\SalesInvoiceController::class, 'sales_receipt'])->name('-checkout-sales');
+    Route::get('/view-receipt/{id}', [App\Http\Controllers\SalesInvoiceController::class, 'view_receipt'])->name('-view-receipt');
+    Route::get('/printSales-rececipt/{id}', [App\Http\Controllers\SalesInvoiceController::class, 'print_sales_receipt'])->name('-printSales-receipt');
+   // Route::get('/checkout-hop', [App\Http\Controllers\SalesInvoiceController::class, 'checkout_selected'])->name('-checkout-p');
+  
 });

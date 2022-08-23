@@ -12,7 +12,9 @@
                <a class="nav-link active text-uppercase" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sales</a>
              </li>
              <li class="" style="margin-left:60%">
-               <a class=" btn btn-primary text-uppercase"  href="{{ route('salercheckouts.index')}}"><i class="fa fa-file"></i></a>
+               <a class=" btn btn-primary" href="{{ route('salercheckouts.index')}}" style="padding-top:18px;"><i class="fa fa-shopping-cart"></i>
+                  <p class="text-warning" style="margin-top:-120%; margin-left:60%;">{{$checkouts->count()}}</p>
+               </a>
              </li>
              <div class="col-sm-12">
              <h5 class="mt-4">View / Create Sale</h5>
@@ -62,18 +64,18 @@
                                 @if($sales->count() == 0 )
                                 <td scope="row"><label class="btn btn-info"> No data Found</label></td>
                                 @else
-                                @foreach ($sales as $s)
+                                @foreach ($sales as $sales)
                                     <tr>
                                          <td scope="row">{!!$count++;!!}</td>
-                                        <td>{{$s->product->product_name}}</td>
-                                        <td>{{$s->category->title}}</td>
-                                        <td>{{$s->qty}}</td>
-                                        <td>{{$s->amount}}</td>
-                                        <td>{{$s->customer_name}}</td>
-                                        <td>{{$s->customer_phone}}</td>
-                                        <td>{{$s->customer_address}}</td>
-                                        <td>{{$s->created_at->diffForHumans()}}</td>
-                                        <td><a href="{{ route('saler-sales-invoice',$s->id)}}" class="btn btn-primary">Print Invoice</a></td>
+                                        <td>{{$sales->product->product_name}}</td>
+                                        <td>{{$sales->product->category->title}}</td>
+                                        <td>{{$sales->quantity}}</td>
+                                        <td>{{$sales->amount}}</td>
+                                        <td>{{$sales->customer->name}}</td>
+                                        <td>{{$sales->customer->phone}}</td>
+                                        <td>{{$sales->customer->address}}</td>
+                                        <td>{{$sales->created_at->diffForHumans()}}</td>
+                                        <td><a href="{{ route('saler-view-receipt',$sales->id)}}" class="btn btn-primary"><i class="fa fa-eye"></i></a></td>
                                      </tr>
                                       @endforeach 
                                      @endif
@@ -99,7 +101,7 @@
                                <div id="discount"></div>
                                <div class="form-group">
                                     <label for="exampleInputEmail1"> Quantity of product</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Title" name="qty">
+                                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Title" name="qty">
                                 
                                 </div>
                                 <label for="exampleInputPassword1">Customer's Phone Number</label>
@@ -113,7 +115,7 @@
                                    <div id="load-customer"></div>
 
                                    <div class="form-group" style="padding:20px;">
-                                     <input type="submit" class="btn btn-info" value="Add to chart" >
+                                     <input type="submit" class="btn btn-info" value="Add To Cart" >
                                    </div>
                               </form>
                            </div>

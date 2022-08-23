@@ -22,9 +22,11 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        $charts = Checkout::all();
+        $carts = Checkout::all();
         $count = 1;
-        return view('sellers.sales.checkout.index',compact('charts','count'));
+        $totalPayment = null;
+        $checkouts = null;
+        return view('sellers.sales.checkout.index',compact('carts','count','totalPayment','checkouts'));
     }
 
     /**
@@ -34,7 +36,7 @@ class CheckoutController extends Controller
      */
     public function create(Request $request)
     {
-        dd($request->select); 
+        
     }
 
     /**
@@ -195,7 +197,7 @@ class CheckoutController extends Controller
                           }
                           else
                           {
-                            $addToChart = ['product_id'=>$request->product,
+                            $addToCart = ['product_id'=>$request->product,
                                             'user_id'=>$user->id,
                                             'discount_id'=>$discount->id,
                                             'invoice_no'=>$random,
@@ -203,7 +205,7 @@ class CheckoutController extends Controller
                                             'amount'=> $qty_discount * $request->qty,
                                             'customer_id'=>$customer->id,
                                             ];
-                               Checkout::create($addToChart);
+                               Checkout::create($addToCart);
                           }
                          
 
@@ -261,10 +263,7 @@ class CheckoutController extends Controller
      */
     public function update(Request $request, $id)
     {
-        foreach ($request->select as $keys)
-        {
-           dd($keys);
-        }
+        
     }
 
     /**

@@ -1,14 +1,10 @@
 @extends('layouts.body')
 @section('title', 'Sales | Inventory')
 @section('content')
-
 @section('header')
-
 <link rel="stylesheet" href="{{ asset('assets/plugins/chart-morris/css/morris.css')}}">
-
 @endsection
-
-    <div class="col-md-6 col-xl-4">
+<div class="col-md-6 col-xl-4">
     <div class="card daily-sales">
         <div class="card-block">
             <h6 class="mb-4">Daily Sales </h6>

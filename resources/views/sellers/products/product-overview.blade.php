@@ -3,15 +3,17 @@
 @section('content')
 <div class="col-sm-12">
    <div class="card">
-    
-        <div class="card-header">
-        <h5 class="mb-3"> Product Overview</h5>/
-           <span class=""> <a href="{{ route('saler-dashbaord')}}" class="">Dashboard</a>  </span>
+     <div class="card-header">
+        <h5 class="mb-3">Overviews</h5>/
+           <span class=""> 
+            <a href="{{ route('saler-dashbaord')}}" class="">Dashboard</a>/ 
+            <a href="{{ route('saler-dashbaord')}}" class="">Product Categories</a>
+           </span>
         </div>
         <div class="accordion" id="accordionExample">
 		   <div class="table-responsive">
                <table class="table">
-                <h3>PRODUCT CATEGORIES</h3>
+                <h3>PRODUCT OVERVIEW</h3>
                  <thead>
                    <tr>
                     <th>S/N</th>
@@ -27,7 +29,7 @@
                         <td>{{$count++}}</td>
                         <td>{{$category->title}}</td>
                         <td>{{$category->description}}</td>
-                        <td><a href="{{ route('saler-product-overiew',$category->id)}}" class="btn btn-primary"> <i class="fa fa-eye"></i> </a></td>
+                        <td><a href="{{ route('saler-viewP',$category->id)}}" class="btn btn-primary"> <i class="fa fa-eye"></i> </a></td>
                     </tr>
                     @endforeach
                  </tbody>
