@@ -21,6 +21,12 @@ class SalesInvoiceController extends Controller
      */
     public function index()
     {
+        $css=[
+            'css/datatables.min.css'
+            ];
+        $js=[
+            'dataTables/datatables.min.js','js/dataTables/dataTables.bootstrap4.min.js' 
+            ];
         $count = 1;
         $id = session()->get('id');
         $sellers = Users::find("$id");
@@ -29,7 +35,7 @@ class SalesInvoiceController extends Controller
         $product = Products::all();
         $discount = Discounts::all();
         $checkouts = Checkout::where('user_id',$id)->get();
-        return view('sellers.sales.index', compact('sales','count','product','cat','checkouts', 'discount'));
+        return view('sellers.sales.index', compact('sales','count','product','cat','js','css','checkouts', 'discount'));
     }
 
     public function load_product($id)
@@ -60,13 +66,17 @@ class SalesInvoiceController extends Controller
 
     public function all_sales()
     {
+        $css=[
+            'css/datatables.min.css'
+            ];
+        $js=[
+            'dataTables/datatables.min.js','js/dataTables/dataTables.bootstrap4.min.js' 
+            ];
             $count = 1;
             $id = session()->get('id');
             $sellers = Users::find("$id");
            $sales = Sales_invoice::where('user_id',$sellers->id)->get();
-
-
-         return view('sellers.sales.all_sales', compact('sales','count'));
+          return view('sellers.sales.all_sales', compact('sales','count','js','css'));
     }
 
     public function searchResult($keyword)

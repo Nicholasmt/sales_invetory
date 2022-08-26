@@ -35,15 +35,12 @@
                     <!-- [ breadcrumb ] end -->
                        <div class="main-body">
                            <div class="page-wrapper">
-
-                                   <!-- content Start -->
+                                  <!-- content Start -->
                                        <div class="row"> 
                                          @include('layouts.error')
                                          
                                        @yield('content')
-                                    
-                                       </div> 
-
+                                      </div> 
                                     <!-- content Ends -->
 
                                     <!-- <footer>
@@ -66,20 +63,19 @@
      <style>
        .footer
        {
-           text-align:center;
+          text-align:center;
        }
-
-
      </style>
          
     <script src="{{ asset('assets/js/vendor-all.min.js')}}"></script>
 	<script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{ asset('assets/js/pcoded.min.js')}}"></script>
+    @if(isset($js) && ! empty($js))
+    @foreach($js as $js_files)
+      <script src="{!! asset('js/'.$js_files) !!}" type="text/javascript"></script>
+   @endforeach
+   @endif
     
-        @yield('script')
-
-   
-
-
+@yield('script')
 @endsection
  

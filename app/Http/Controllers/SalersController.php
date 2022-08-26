@@ -57,8 +57,14 @@ class SalersController extends Controller
     
     public function product_overview()
     {
+        $css=[
+            'css/datatables.min.css'
+            ];
+        $js=[
+            'dataTables/datatables.min.js','js/dataTables/dataTables.bootstrap4.min.js' 
+            ];
         $categories = Categories::all();
-        return view('sellers.products.overview',compact('categories')); 
+        return view('sellers.products.overview',compact('categories','js','css')); 
     }
 
     public function overview($id)
@@ -66,28 +72,22 @@ class SalersController extends Controller
 
         $products = Products::where('cat_id', $id)->get();
 
-        return view('sellers.products.product-overview', compact('products'));
+        return view('sellers.products.product-overview', compact('products','js','css'));
 
     }
 
-
-     
-    public function sales_invoice($id)
+     public function sales_invoice($id)
       {
-
            $company = Company_setup::all();
            $invoice = Sales_invoice::find("$id");
-
-           return view('sellers.invoice.invoice', compact('invoice', 'company'));
+          return view('sellers.invoice.invoice', compact('invoice', 'company'));
       }
 
       public function invoice_print($id)
       {
-
         $company = Company_setup::all();
         $invoice = Sales_invoice::find("$id");
-
-         return view('sellers.invoice.print-invoice', compact('invoice', 'company'));
+        return view('sellers.invoice.print-invoice', compact('invoice', 'company'));
       }
 
 

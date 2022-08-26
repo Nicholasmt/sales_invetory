@@ -1,11 +1,7 @@
 @extends('layouts.body')
 @section('title', 'Sales | Inventory')
 @section('content')
- 
-@section('header')
-  <link href="{{ asset('assets/css/datatables.min.css')}}" rel="stylesheet">
-@endsection
- <div class="col-sm-12">
+<div class="col-sm-12">
    <h5>Employees</h5>
       <hr>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -135,5 +131,4 @@
             });
 
         </script>
-
-        @endsection
+    @endsection

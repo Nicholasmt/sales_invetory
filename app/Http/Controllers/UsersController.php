@@ -19,11 +19,17 @@ class UsersController extends Controller
      */
     public function index()
     {
+        $css=[
+            'css/datatables.min.css'
+            ];
+        $js=[
+            'dataTables/datatables.min.js','js/dataTables/dataTables.bootstrap4.min.js' 
+            ];
         $id = session()->get('id');
         $count = 1;
         $users = Users::where('role_id',2)->get();
         $roles = Roles::all();
-        return view('admin.employees.index',compact('users','roles','count'));
+        return view('admin.employees.index',compact('users','roles','count','js','css'));
     }
 
     /**

@@ -39,16 +39,20 @@ class AdminController extends Controller
     public function add_new()
     {
         $privilege = Users::all();
-
        return view('admin.add-sellers.add', compact('privilege'));
     }
 
     public function view_all_sales()
     {
+        $css=[
+            'css/datatables.min.css'
+            ];
+        $js=[
+            'dataTables/datatables.min.js','js/dataTables/dataTables.bootstrap4.min.js' 
+            ];
         $count = 1;
         $sales = Sales_invoice::all();
-
-       return view('admin.sales-overview.view', compact('sales','count'));
+       return view('admin.sales-overview.view', compact('sales','js','css','count'));
     }
 
     public function view()

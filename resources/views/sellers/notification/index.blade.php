@@ -1,13 +1,35 @@
 @extends('layouts.body')
 @section('title', 'Sales | Inventory')
 @section('content')
- <div class="col-sm-12">
- <div class="card">
-     <div class="card-header">
-        <h5 class="mb-3">Notifications</h5>/
-           <span class=""> <a href="{{ route('saler-dashbaord')}}" class="">Dashboard</a>  </span>
-         </div>
-			 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+<!-- [ breadcrumb ] start -->
+<div class="page-header">
+	<div class="page-block">
+		<div class="row align-items-center">
+			<div class="col-md-12">
+				<div class="page-header-title">
+					<h5 class="m-b-10">Notifications</h5>
+				</div>
+				<ul class="breadcrumb">
+				@if (Session::get('user_auth') == true && Session::get('privilege') == 1)
+                   <li class="breadcrumb-item"><a href="{{ route('admin-dashbaord')}}"><i class="feather icon-home"></i></a></li>
+				@elseif (Session::get('user_auth') == true && Session::get('privilege') == 2)
+				    <li class="breadcrumb-item"><a href="{{ route('saler-dashbaord')}}"><i class="feather icon-home"></i></a></li>
+				@endif
+					<li class="breadcrumb-item"><a href="javascript:">Notifications</a></li>
+
+				 </ul>
+			 </div>
+		 </div>
+	  </div>
+   </div>
+<!-- [ breadcrumb ] end -->
+    <div class="col-xl-12">
+          <!-- <div class="card">
+				<div class="card-header">
+					<h5>Messages</h5>
+				</div>
+           </div> -->
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 				<li class="nav-item">
 					<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-inbox" role="tab" aria-controls="pills-inbox" aria-selected="true">Inbox <i class="fa fa-arrow-down"></i></a>
 				</li>
@@ -22,7 +44,7 @@
            <!--Tab #1 Starts-->
 				  <div class="tab-pane fade show active" id="pills-inbox" role="tabpanel" aria-labelledby="pills-home-tab">
 					 <div class="card-block table-border-style">
-                       <h3 class="mt-4">Inbox</h3><br>
+                       <h3 class="mt-1 font-bold">INBOX </h3><br>
                      </div>
                      <div class="table-responsive">
                        <table class="table">
@@ -37,7 +59,18 @@
                               </tr>
                           </thead>
                           <tbody>
-							@php $count=1 @endphp
+							@if($unread->count()==1)
+						      <p class="padding text-center">You have 
+								<span class="text-info font-bold">{{$unread->count()}}</span> 
+								<span class="badge badge-danger">new</span> unread Message
+							  </p>
+							@else
+							  <p class="padding text-center">You have 
+								<span class="text-info font-bold">{{$unread->count()}}</span> 
+								<span class="badge badge-danger">new</span> unread Messages
+							  </p>
+							@endif
+						    @php $count=1 @endphp
 							@if ($inboxes->count()==0)
 							  <td class="badge badge-warning"> No Message Found</td>
 							  @else
@@ -52,7 +85,7 @@
 								 <td class="bold-text"> 
 								   <form action="" method="POST">
 									   <span class="badge badge-danger">new</span>
-									   <button class="btn btn-primary" type="submit" name="new">
+									    <button class="btn btn-primary" type="submit" name="new">
 											 <i class="fa fa-envelope"></i>  
 										</button>
 									</form>
@@ -130,7 +163,7 @@
         <!--Tab #3 Starts-->
 			  <div class="tab-pane fade" id="pills-sent" role="tabpanel" aria-labelledby="pills-home-tab">
 				 <div class="card-block table-border-style">
-				   <h3 class="mt-4">Sent</h3><br>
+				   <h3 class="mt-1">Sent</h3><br>
 				 </div>
 				 <div class="table-responsive">
 				   <table class="table">
@@ -177,8 +210,7 @@
 		  </div>
 <!--Tab #3 Ends-->
         </div>
-     </div>
-  </div>
+   </div>
  
  <style>
   .bold-text
@@ -187,11 +219,45 @@
 	font-size:20px;
 	color:black;
   }
+    select.form-control.form-control-sm
+    {
+        padding:8px 7px;
+    }
  </style>
+
+   
 
  
           
-<script src="{{ asset('js/loader.js')}}"></script>
 
+ @endsection
+ @section('script')
+       <script src="{{ asset('js/loader.js')}}"></script>
+       <script src="{{ asset('js/dataTables/datatables.min.js')}}"></script>
+       <script src="{{ asset('js/dataTables/dataTables.bootstrap4.min.js')}}"></script>  
+       <script>
+         $(document).ready(function(){
+                $('.table').DataTable({
+                    pageLength: 10,
+                    responsive: true,
+                    dom: '<"html5buttons"B>lTfgitp',
+                    buttons: [
+                         {extend: 'print',
+                        customize: function (win){
+                                $(win.document.body).addClass('white-bg');
+                                $(win.document.body).css('font-size', '10px');
 
-@endsection
+                                $(win.document.body).find('table')
+                                        .addClass('compact')
+                                        .css('font-size', 'inherit');
+                        }
+                        }
+                    ]
+
+                });
+
+            });
+
+        </script>
+ 
+ @endsection

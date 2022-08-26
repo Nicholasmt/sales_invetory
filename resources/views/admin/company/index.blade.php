@@ -1,10 +1,6 @@
 @extends('layouts.body')
 @section('title', 'Sales | Inventory')
 @section('content')
- 
-@section('header')
-  <link href="{{ asset('assets/css/datatables.min.css')}}" rel="stylesheet">
-@endsection
  <div class="col-sm-12">
    <h5>Company</h5>
       <hr>
@@ -116,7 +112,7 @@
 @section('script')
       <script src="{{ asset('js/delete.js')}}"></script>
        <script src="{{ asset('js/dataTables/datatables.min.js')}}"></script>
-      <script src="{{ asset('js/dataTables/dataTables.bootstrap4.min.js')}}"></script>  
+       <script src="{{ asset('js/dataTables/dataTables.bootstrap4.min.js')}}"></script>  
        <script>
          $(document).ready(function(){
                 $('.table').DataTable({

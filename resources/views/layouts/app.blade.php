@@ -1,13 +1,10 @@
 <html lang="en">
 
 <head>
-
-    <title>@yield('title')</title>
+     <title>@yield('title')</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- <meta name="description" content="Free Datta Able Admin Template come up with latest Bootstrap 4 framework with basic components, form elements and lots of pre-made layout options" />
-    <meta name="keywords" content="admin templates, bootstrap admin templates, bootstrap 4, dashboard, dashboard templets, sass admin templets, html admin templates, responsive, bootstrap admin templates free download,premium bootstrap admin templates, datta able, datta able bootstrap admin template, free admin theme, free dashboard template"/> -->
     <meta name="author" content="CodedThemes"/>
     <meta name="site_url" content="{{url('')}}">
       <!-- CSRF Token -->
@@ -23,17 +20,20 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/animation/css/animate.min.css')}}">
     <!-- vendor css -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
+    
+    @if(isset($css) && ! empty($css))
+      @foreach($css as $css_files)
+      <link rel="stylesheet" href="{!! asset('assets/'.$css_files) !!}" />
+      @endforeach
+    @endif
 
     @yield('header')
 
   </head>
 
-    <body>
-
+   <body>
     @yield('body')
-    
-
-    </body>
+   </body>
       
  
 </html>

@@ -17,18 +17,26 @@ class NoticationsController extends Controller
      */
     public function index()
     {
+       $css=[
+            'css/datatables.min.css'
+            ];
+        $js=[
+            'dataTables/datatables.min.js','js/dataTables/dataTables.bootstrap4.min.js' 
+            ];
          $id = session()->get('id');
         if (session()->get('user_auth') == true && session()->get('privilege') == 2)
         {
             $inboxes = Notification::where(['incoming'=>1])->get();
             $sents = Notification::where('user_id',$id)->get();
-            return view('sellers.notification.index', compact('inboxes','sents'));
+            $unread = Notification::where(['incoming'=>1,'status'=>0])->get();
+            return view('sellers.notification.index', compact('inboxes','sents','unread','css','js'));
         }
         elseif (session()->get('user_auth') == true && session()->get('privilege') == 1)
         {
             $inboxes = Notification::where(['incoming'=>2])->get();
             $sents = Notification::where('user_id',$id)->get();
-            return view('sellers.notification.index', compact('inboxes','sents'));
+            $unread = Notification::where(['incoming'=>2,'status'=>0])->get();
+            return view('sellers.notification.index', compact('inboxes','sents','unread','js','css'));
         }
          
     }
