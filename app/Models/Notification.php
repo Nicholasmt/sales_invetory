@@ -7,7 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Notification extends Model
 {
-    protected $guareded =[];
-    protected $table = 'sales_notification';
+    protected $table = 'notifications';
+    protected $guarded =[];
     use HasFactory;
+
+    
+    public function user()
+    {
+      return $this->belongsTo('App\Models\Users', 'user_id');
+    }
 }

@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sales_notification', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
-            $table->string('title');
+            $table->string('subject');
             $table->string('description')->nullable();
             $table->string('message');
-           
+            $table->smallInteger('incoming');
+            $table->smallInteger('status')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')

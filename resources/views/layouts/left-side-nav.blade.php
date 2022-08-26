@@ -36,6 +36,9 @@
         <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">
           <a href="{{ route('admindiscounts.index')}}" class="nav-link "><span class="pcoded-micon"><i class="fa fa-briefcase"></i></span><span class="pcoded-mtext">Discounts</span></a>
         </li>
+        <li data-username="Table bootstrap datatable footable" class="nav-item">
+            <a href="{{ route('adminnotifications.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-bell"></i></span><span class="pcoded-mtext">Notifications</span></a>
+        </li>
 		<li data-username="Table bootstrap datatable footable" class="nav-item">
             <a href="{{ route('adminlogs.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-server"></i></span><span class="pcoded-mtext">Sellers Logs</span></a>
         </li>
@@ -57,7 +60,7 @@
         </li>
 
         <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">
-            <a href="{{ route('salernotifications.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Notifications</span></a>
+            <a href="{{ route('salernotifications.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-bell"></i></span><span class="pcoded-mtext">Notifications</span></a>
         </li>
 
  @endif

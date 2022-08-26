@@ -39,6 +39,7 @@ Route::group(['prefix'=> 'admin', 'as'=>'admin', 'middleware' => 'admin'], funct
     Route::resource('profile', App\Http\Controllers\AdminController::class);
     Route::resource('users', App\Http\Controllers\UsersController::class);
     Route::resource('logs', App\Http\Controllers\LogsController::class);
+    Route::resource('notifications', App\Http\Controllers\NoticationsController::class);
     Route::get('/delete/{user}', [App\Http\Controllers\UsersController::class, 'delete'])->name('-deleteUsers');
     Route::get('/deletecategory/{category}', [App\Http\Controllers\CategoryController::class, 'delete'])->name('-deleteCategory');
     Route::get('/deletediscount/{discount}', [App\Http\Controllers\DiscountController::class, 'delete'])->name('-deleteDiscount');

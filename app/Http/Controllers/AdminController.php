@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Users;
 use App\Models\Categories;
 use App\Models\Products;
-use App\Models\Sales_invocie;
+use App\Models\Sales_invoice;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
@@ -21,9 +21,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $daily_sales = Sales_invocie::whereDate('created_at', date("Y:m:d"))->get();
-        $monthly_sales = Sales_invocie::whereMonth('created_at', date('m'))->get();
-        $yearly_sales = Sales_invocie::whereYear('created_at', Carbon::now()->year)->get();
+        $daily_sales = Sales_invoice::whereDate('created_at', date("Y:m:d"))->get();
+        $monthly_sales = Sales_invoice::whereMonth('created_at', date('m'))->get();
+        $yearly_sales = Sales_invoice::whereYear('created_at', Carbon::now()->year)->get();
          $totalDaily = $daily_sales->sum('amount');
         $totalMonthly = $monthly_sales->sum('amount');
         $totalYearly = $yearly_sales->sum('amount');
@@ -46,7 +46,7 @@ class AdminController extends Controller
     public function view_all_sales()
     {
         $count = 1;
-        $sales = Sales_invocie::all();
+        $sales = Sales_invoice::all();
 
        return view('admin.sales-overview.view', compact('sales','count'));
     }
