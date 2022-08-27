@@ -44,7 +44,7 @@
            <!--Tab #1 Starts-->
 				  <div class="tab-pane fade show active" id="pills-inbox" role="tabpanel" aria-labelledby="pills-home-tab">
 					 <div class="card-block table-border-style">
-                       <h3 class="mt-1 font-bold">INBOX </h3><br>
+                       <h3 class="mt-1 font-bold text-center">INBOX</h3><br>
                      </div>
                      <div class="table-responsive">
                        <table class="table">
@@ -78,18 +78,17 @@
 							  <tr class=" ">
 								@if ($inbox->status==0)
 								 <td class="bold-text">{{$count++}}</td>
-								 <td class="bold-text">{{$inbox->subject}} </td>
+								 <td class="bold-text">{{$inbox->subject}}  <span class="badge badge-danger">new</span> </td>
 								 <td class="bold-text">{{$inbox->description}}</td>
 								 <td class="bold-text"> {{$inbox->user->first_name}} </td>
 								 <td class="bold-text">{{$inbox->created_at}} </td>
 								 <td class="bold-text"> 
-								   <form action="" method="POST">
-									   <span class="badge badge-danger">new</span>
-									    <button class="btn btn-primary" type="submit" name="new">
-											 <i class="fa fa-envelope"></i>  
-										</button>
-									</form>
-								 </td>
+								 @if (Session::get('user_auth') == true && Session::get('privilege') == 1)
+								  <a href="{{ route('adminnotifications.show',['notification'=>$inbox])}}" class="btn btn-info"><i class="fa fa-envelope"></i></a>
+								@elseif (Session::get('user_auth') == true && Session::get('privilege') == 2)
+								  <a href="{{ route('salernotifications.show',['notification'=>$inbox])}}" class="btn btn-info"><i class="fa fa-envelope"></i></a>
+								@endif
+								</td>
 								 @else
 								 <td>{{$count++}}</td>
 								 <td>{{$inbox->subject}} </td>
@@ -97,15 +96,14 @@
 								 <td> {{$inbox->user->first_name}} </td>
 								 <td>{{$inbox->created_at}} </td>
 								 <td>
-									<form action="" method="POST">
-									    <button class="btn btn-secondary" type="submit" name="read">
-											 <i class="fa fa-envelope"></i>  
-										</button>
-									</form>
-								</td>
+								 @if (Session::get('user_auth') == true && Session::get('privilege') == 1)		
+                                   <a href="{{ route('adminnotifications.show',['notification'=>$inbox])}}" class="btn btn-info"><i class="fa fa-envelope"></i></a>
+								 @elseif (Session::get('user_auth') == true && Session::get('privilege') == 2)
+								   <a href="{{ route('salernotifications.show',['notification'=>$inbox])}}" class="btn btn-secondary"><i class="fa fa-envelope"></i></a>
+								 @endif
+								 </td>
 								@endif
-                                 
-							  </tr>
+                               </tr>
 							  @endforeach
 							  @endif
                           </tbody>

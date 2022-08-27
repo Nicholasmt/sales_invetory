@@ -69,6 +69,6 @@ Route::group(['prefix' => 'saler', 'as' => 'saler', 'middleware' => 'saler'], fu
     Route::post('/checkout-sales', [App\Http\Controllers\SalesInvoiceController::class, 'sales_receipt'])->name('-checkout-sales');
     Route::get('/view-receipt/{id}', [App\Http\Controllers\SalesInvoiceController::class, 'view_receipt'])->name('-view-receipt');
     Route::get('/printSales-rececipt/{id}', [App\Http\Controllers\SalesInvoiceController::class, 'print_sales_receipt'])->name('-printSales-receipt');
-   // Route::get('/checkout-hop', [App\Http\Controllers\SalesInvoiceController::class, 'checkout_selected'])->name('-checkout-p');
+    Route::get('/r', [App\Http\Controllers\SalesInvoiceController::class, 'checkout_selected'])->name('-checkout-p');
   
 });

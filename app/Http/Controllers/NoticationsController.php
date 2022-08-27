@@ -46,9 +46,9 @@ class NoticationsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -91,8 +91,20 @@ class NoticationsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    { 
+        $notification = Notification::find("$id");
+        if($notification->status == 1)
+        {
+          return view('sellers.notification.show',compact('notification'));
+        }
+        else
+        {
+          Notification::where('id',$id)->update(['status'=>1]);
+          return view('sellers.notification.show',compact('notification'));
+        }
+
+       
+        
     }
 
     /**
