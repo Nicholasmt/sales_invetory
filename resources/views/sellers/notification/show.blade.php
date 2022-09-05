@@ -10,10 +10,10 @@
             </div>
             <ul class="breadcrumb">
             @if (Session::get('user_auth') == true && Session::get('privilege') == 1)
-                   <li class="breadcrumb-item"><a href="{{ route('admin-dashbaord')}}"><i class="feather icon-home"></i></a></li>
+                   <li class="breadcrumb-item"><a href="{{ route('admin-dashboard')}}"><i class="feather icon-home"></i></a></li>
                    <li class="breadcrumb-item"><a href="{{ route('adminnotifications.index')}}">Notification</a></li>/
 				@elseif (Session::get('user_auth') == true && Session::get('privilege') == 2)
-				    <li class="breadcrumb-item"><a href="{{ route('saler-dashbaord')}}"><i class="feather icon-home"></i></a></li>
+				    <li class="breadcrumb-item"><a href="{{ route('saler-dashboard')}}"><i class="feather icon-home"></i></a></li>
                     <li class="breadcrumb-item"><a href="{{ route('salernotifications.index')}}">Notification</a></li>/
 				@endif
                

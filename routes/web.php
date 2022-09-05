@@ -48,7 +48,7 @@ Route::group(['prefix'=> 'admin', 'as'=>'admin', 'middleware' => 'admin'], funct
  });
    
 Route::group(['prefix' => 'saler', 'as' => 'saler', 'middleware' => 'saler'], function(){
-    Route::get('/dashboard', [App\Http\Controllers\SalersController::class, 'index'])->name('-dashbaord');
+    Route::get('/dashboard', [App\Http\Controllers\SalersController::class, 'index'])->name('-dashboard');
     Route::resource('createsales', App\Http\Controllers\SalesInvoiceController::class);
     Route::resource('profile', App\Http\Controllers\AdminController::class);
     Route::resource('checkouts', App\Http\Controllers\CheckoutController::class);
